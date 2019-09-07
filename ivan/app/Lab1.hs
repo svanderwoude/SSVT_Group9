@@ -70,3 +70,65 @@ exc4PrimeReversal = [ x | x <- [1..10000], prime x, prime $ reversal x ]
 
 -- TODO: figure out the testing part
 
+
+-- Excercise 5
+exc5sumFirst101Primes :: Integer
+exc5sumFirst101Primes = sum $ take 101 primes
+
+-- TODO: testing
+
+
+-- Excercise 6
+exc6toRefute :: Integer -> Integer
+exc6toRefute n = product (take (fromIntegral n) primes) + 1
+
+-- generate counter examples for the above statement
+exc6counterExamples :: [Integer]
+exc6counterExamples = filter (not . prime) (map exc6toRefute [1..])
+
+-- find the minimum prime for which the above statement is false
+exc6minPrimeToRefute = head exc6counterExamples 
+
+-- proveWrong = quickCheckResult $ forAll genIntegersLargerThan1 
+
+
+-- Excercise 7
+digits :: Integer -> [Int]
+digits = map (read . (:[])) . show
+
+-- applies a function to every second element of a list
+applyToEverySecondElement :: (a -> a) -> [a] -> [a]
+applyToEverySecondElement f (x:s:xs) = x: f s : applyToEverySecondElement f xs
+applyToEverySecondElement f xs = xs
+
+-- Read the digits of a number, reverse them and then multiply every other digit by 2. If the resulting number is bigger than 9, the subtract 9 from it
+exc7modifyEveryOtherElement :: Integer -> [Int]
+exc7modifyEveryOtherElement n = map (\x -> if x > 9 then x - 9 else x) $ applyToEverySecondElement (*2) (reverse $ digits n)
+
+-- Check if the sum of all digits end with 0
+exc7luhn :: Integer -> Bool
+exc7luhn n =  sum (exc7modifyEveryOtherElement n) `mod` 10 == 0
+
+exc7checkNumDigits :: Integer -> Int -> Bool
+exc7checkNumDigits n a = length (digits n) == a
+
+exc7startsWith :: Integer -> Integer -> Bool
+exc7startsWith n a = digits a `isPrefixOf` digits n
+
+-- Checks if Luhn is True and whether the number is 15 digits and starts with either 37 or 34
+exc7isAmericanExpress :: Integer -> Bool
+exc7isAmericanExpress n = exc7luhn n && exc7checkNumDigits n 15 && (exc7startsWith n 37 || exc7startsWith n 34) 
+
+-- Checks if Luhn is True and whether the number is 16 digits and starts with 5
+exc7isMaster :: Integer -> Bool
+exc7isMaster n = exc7luhn n && exc7checkNumDigits n 16 && exc7startsWith n 5
+
+-- Checks if Luhn is True and whether the number is either 16 or 13 digits and starts with 4
+exc7isVisa :: Integer -> Bool
+exc7isVisa n = exc7luhn n && (exc7checkNumDigits n 16 || exc7checkNumDigits n 13) && exc7startsWith n 4
+
+-- Excercise 8
+data Boy = Matthew | Peter | Jack | Arnold | Carl 
+            deriving (Eq,Show)
+ 
+boys = [Matthew, Peter, Jack, Arnold, Carl]

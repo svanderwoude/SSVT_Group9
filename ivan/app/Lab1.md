@@ -15,4 +15,19 @@ Time spent: 1h 15min
 Time spent: 40min
 
 ## Excercise 3
-Time spent 30min
+Time spent: 30min
+
+## Excercise 4
+Time spent: 45min
+
+## Excercise 5
+Time spent: 20min (so far)
+
+## Excercise 6
+Time spent: 45min (so far)
+
+## Excercise 7
+Time spent: 1h (so far)
+
+## Excercise 8
+Time spent: 20min (so far)
