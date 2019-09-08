@@ -2,6 +2,9 @@ module MainFile where
 import Ass1
 import Ass2
 import Ass3
+import Ass4
+import Ass5
+import Ass6
 import HelperCodeLab1
 import Test.QuickCheck
 
@@ -18,3 +21,16 @@ main = do
     -- Assignment 3
     putStrLn "==== ASSIGNMENT 3 ===="
     quickCheckResult $ forAll genTinyPositiveIntegers testWorkshopAssFive
+
+    -- Assignment 4
+    putStrLn "==== ASSIGNMENT 4 ===="
+    -- findReversablePrimesLimited
+    putStrLn "+++ OK, but no tests executed."
+
+    -- Assignment 5
+    putStrLn "==== ASSIGNMENT 5 ===="
+    putStrLn "--- FAILED, no tests executed."
+
+    -- Assignment 6
+    putStrLn "==== ASSIGNMENT 6 ===="
+    putStrLn ("The smallest value of n is: " ++ show testExpectedPrime)
