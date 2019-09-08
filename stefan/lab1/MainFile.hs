@@ -5,6 +5,8 @@ import Ass3
 import Ass4
 import Ass5
 import Ass6
+import Ass7
+import Ass8
 import HelperCodeLab1
 import Test.QuickCheck
 
@@ -34,3 +36,11 @@ main = do
     -- Assignment 6
     putStrLn "==== ASSIGNMENT 6 ===="
     putStrLn ("The smallest value of n is: " ++ show testExpectedPrime)
+
+    -- Assignment 7
+    putStrLn "==== ASSIGNMENT 7 ===="
+    putStrLn "+++ OK, but no tests executed."
+
+    -- Assignment 8
+    putStrLn "==== ASSIGNMENT 8 ===="
+    putStrLn "+++ OK, but no tests executed."
