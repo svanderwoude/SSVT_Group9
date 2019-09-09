@@ -18,7 +18,7 @@ main = do
 
     -- Assignment 2
     putStrLn "==== ASSIGNMENT 2 ===="
-    quickCheckResult $ forAll genTinyPositiveIntegers testWorkshopAssFour
+    quickCheckResult $ forAll genSmallPositiveIntegers testWorkshopAssFour
 
     -- Assignment 3
     putStrLn "==== ASSIGNMENT 3 ===="
