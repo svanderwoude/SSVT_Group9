@@ -26,8 +26,8 @@ main = do
 
     -- Assignment 4
     putStrLn "==== ASSIGNMENT 4 ===="
-    -- findReversablePrimesLimited
-    putStrLn "+++ OK, but no tests executed."
+    putStrLn "--- FAILED, no tests executed."
+    -- show (testReversablePrimesSet (findReversablePrimes 1000))
 
     -- Assignment 5
     putStrLn "==== ASSIGNMENT 5 ===="

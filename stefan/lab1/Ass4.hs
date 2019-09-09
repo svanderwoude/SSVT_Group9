@@ -1,6 +1,6 @@
 -- LAB 1
 -- Assignment 4
--- Time: 15 minutes (TODO update with test)
+-- Time: 30 minutes
 
 module Ass4 where
 import Data.List
@@ -15,5 +15,10 @@ findReversablePrimes n = [x | x <- [1..n], prime x, prime (reversal x)]
 findReversablePrimesLimited :: [Integer]
 findReversablePrimesLimited = findReversablePrimes 10000
 
--- Test
--- TODO
+-- Test a single prime for reversability
+testReversablePrimes :: Integer -> Bool
+testReversablePrimes n = prime n && prime (reversal n)
+
+-- Test a set of primes for reversability
+testReversablePrimesSet :: [Integer] -> Bool
+testReversablePrimesSet xs = all testReversablePrimes xs
