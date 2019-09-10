@@ -79,6 +79,7 @@ testNumberOfPermutations n = numberOfPermutations2 n == toInteger(length $ numbe
 -- primeReversal :: Integer -> [Integer]
 -- primeReversal n = [ x | x <- [1..n], prime x, prime (reversal x) ]
 
+-- STILL WORKING ON IT
 -- isPrime :: Integer -> [Integer]
 -- isPrime k = [ x | x <- [2..k - 1], k > 1, k `mod` x == 0]
 

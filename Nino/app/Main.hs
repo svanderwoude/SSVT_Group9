@@ -14,7 +14,7 @@ genPositiveIntegers = abs <$> (arbitrary :: Gen Integer) `suchThat` (>0)
 
 --Small Positive Integer generator for tests
 genSmallIntegers :: Gen Integer
-genSmallIntegers = abs <$> (arbitrary :: Gen Integer) `suchThat` (\x -> x > 0 && x < 10)
+genSmallIntegers = abs <$> (arbitrary :: Gen Integer) `suchThat` (\x -> x > 0 && x < 24)
 
 --Small Positive Integer generator for tests
 genSmallIntegersForPrime :: Gen Integer

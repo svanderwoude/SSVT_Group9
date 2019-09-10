@@ -22,29 +22,31 @@ main = do
     -- Assignment 2
     putStrLn "\n==== ASSIGNMENT 2 ===="
     quickCheckResult $ forAll genSmallPositiveIntegers testWorkshopAssFour
-    -- TODO: Add answer on questions - Nino
     --       Question: Is the property hard to test? If you find that it is, can you given a reason why?
-    --       Answer:
+    --       Answer: One of the reasons the property is hard to test is because of the computational power
+    --               it would require for larger numbers, that's why we used small integers.
 
     --      Question: Give your thoughts on the following issue: when you perform the test
     --                for exercise 4, what are you testing actually? Are you checking a mathematical
     --                fact? Or are you testing whether subsequences satisfies a part of its
     --                specification? Or are you testing something else still?
-    --       Answer:
+    --       Answer: In exercise 4 we try to test whether subsequences satisfies a part of its
+    --               specification.
 
 
     -- Assignment 3
     putStrLn "\n==== ASSIGNMENT 3 ===="
     quickCheckResult $ forAll genTinyPositiveIntegers testWorkshopAssFive
-    -- TODO: Add answer on questions - Nino
     --       Question: Is the property hard to test? If you find that it is, can you given a reason why?
-    --       Answer:
+    --       Answer: One of the reasons the property is hard to test is because of the computational power
+    --               it would require for larger numbers, that's why we used small integers.
 
     --      Question: Again, give your thoughts on the following issue: when you perform the test
     --                for exercise 5, what are you testing actually? Are you checking a mathematical
-    --                fact? Or are you testing whether subsequences satisfies a part of its
+    --                fact? Or are you testing whether perms satisfies a part of its
     --                specification? Or are you testing something else still?
-    --       Answer:
+    --       Answer: In exercise 5 we try to check for a mathematical fact i.e. there are n! permutations for a 
+    --               list of n distinct objects. 
 
 
     -- Assignment 4
@@ -53,11 +55,13 @@ main = do
     print (findReversablePrimes 10000)
 
     if (testReversablePrimesSet (findReversablePrimes 10000)) == True
-        then putStrLn "+++ OK, passed own test."
-        else putStrLn "--- ERROR, failed own test."
-    -- TODO: Add answer on questions - Ninoz
+        then putStrLn "+++ OK, passed own test. +++"
+        else putStrLn "--- ERROR, failed own test. ---"
     --       Question: How would you test this function, by the way?
-    --       Answer:
+    --       Answer: The function takes a number (in this case 10000) and returns a list with numbers that are primes
+    --       (with and without reversal), then to test this function we take this list of prime numbers and check if
+    --       they satisfy prime condition (with and without reversal) and if all numbers inside the list are true then
+    --       the funtion works
 
 
     -- Assignment 5
