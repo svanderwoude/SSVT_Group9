@@ -1,3 +1,12 @@
+-- Lab 1 submission
+-- Run using ghci: 'ghci MainFile.hs'
+-- Then in the shell execute the command 'main' for all tests
+--
+-- Results consist of answers to the questions (in comments),
+-- QuickCheck test results (1, 2, 3)
+-- Calculated values as answers (4, 5, 6, 8)
+-- Own extra test results (4, 7)
+
 module MainFile where
 import Ass1
 import Ass2
@@ -9,8 +18,6 @@ import Ass7
 import Ass8
 import HelperCodeLab1
 import Test.QuickCheck
-
--- TODO: Check if the code compiles and the test run correctly before handing in.
 
 main = do
     -- Assignment 1
@@ -55,8 +62,8 @@ main = do
     print (findReversablePrimes 10000)
 
     if (testReversablePrimesSet (findReversablePrimes 10000)) == True
-        then putStrLn "+++ OK, passed own test. +++"
-        else putStrLn "--- ERROR, failed own test. ---"
+        then putStrLn "+++ OK, passed own test."
+        else putStrLn "--- ERROR, failed own test."
     --       Question: How would you test this function, by the way?
     --       Answer: The function takes a number (in this case 10000) and returns a list with numbers that are primes
     --       (with and without reversal), then to test this function we take this list of prime numbers and check if
