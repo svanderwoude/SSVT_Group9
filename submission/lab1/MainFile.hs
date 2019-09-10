@@ -66,7 +66,10 @@ main = do
     print exc5sumFirst101Primes
     -- TODO: Add answer on questions - Samy
     --       Question: Do you have to test that your answer is correct? How could this be checked?
-    --       Answer:
+    --       Answer: Testing can be done by creating the sets of 101 consecutive primes starting at the first prime (2).
+    --               For each of these sets a unit test can be created, combining the set with if the set produces a prime or not.
+    --               The goal of the unit test is to see if the sets that do not produce a prime, indeed do not produce a prime.
+      --             And vise versa, the sets that do sum up to a prime, indeed produce a prime.
 
 
     -- Assignment 6
