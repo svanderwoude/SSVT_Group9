@@ -38,7 +38,9 @@ main = do
     --                fact? Or are you testing whether subsequences satisfies a part of its
     --                specification? Or are you testing something else still?
     --       Answer: In exercise 4 we try to test whether subsequences satisfies a part of its
-    --               specification.
+    --               specification. If the order of the elements in each subsequence does not matter, 
+    --               then every subsequence is an element of the powerset of the given sequence. 
+    --               If a set A contains n elements, then the powerset of A contains 2𝑛 elements.
 
 
     -- Assignment 3
