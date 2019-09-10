@@ -1,7 +1,3 @@
--- LAB 1
--- Assignment 1
--- Time: 1 hour (including installing and initial setup of QuickCheck)
-
 module Ass1 where
 import Data.List
 import HelperCodeLab1
