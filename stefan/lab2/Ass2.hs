@@ -1,6 +1,6 @@
 -- LAB 2
 -- Assignment 2
--- Time: 30 minutes
+-- Time: 30 minutes (+ TODO testing)
 
 module Ass2 where
 import Data.List
