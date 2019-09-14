@@ -121,9 +121,28 @@ ex35 = NamedFunction "even" e35
 --          (even x && x > 3) || even x,
 --          even,
 --          even x || x > 3]
-orderProps = reverse $ sortBy compareProps [ex31, ex32, ex33, ex34, ex35]
+orderProps = sortBy (flip compareProps) [ex31, ex32, ex33, ex34, ex35]
 
 
 -- Excercise 4
---isPermutation :: Eq a => [a] -> [a] -> Bool
---isPermutation xs ys = 
+isPermutation :: Eq a => [a] -> [a] -> Bool
+isPermutation xs ys = length xs == length ys && all (`elem` xs) ys && all (`elem` ys) xs
+
+-- Having the pre-condition of no duplicates in the input, means we test less in the
+-- implementation of the function
+testIsPermutation :: [Int] -> [Int] -> IO ()
+testIsPermutation xs ys = putStrLn ("Testing whether " ++ show xs ++ " and " ++ show ys ++ " are permutations of each other: " ++ show (isPermutation xs ys))
+
+testRel :: (a -> a -> Bool) -> (a -> a) -> [a] -> Bool
+testRel spec f = all (\x -> spec x (f x))
+
+permP1 = testRel (\xs ys -> length xs == length ys) isPermutation
+
+isPermutationTests = do
+    testIsPermutation [1,2,3] [3,2,1]
+    testIsPermutation [3,1,1] [3,2,1] -- check whether duplicates in the first list are detected
+    testIsPermutation [1,2,3] [3,1,1] -- check whether duplicates in the second list are detected
+    testIsPermutation [1,2,3] [4,3,2,1] -- check differring lengths
+    testIsPermutation [1,2,3,4] [3,2,1] -- check dffering lengths
+
+-- TODO: properties

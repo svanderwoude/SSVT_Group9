@@ -9,3 +9,6 @@ Time spent: 30min
 
 ## Excercise 3
 Time spent: 1h
+
+## Excercise 4
+Time spent: 1h (so far)
