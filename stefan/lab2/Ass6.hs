@@ -1,6 +1,11 @@
 -- LAB 2
 -- Assignment 6
 -- Time: 30 minutes (+ TODO testing)
+--
+-- Specification:
+-- (basic) ROT13 takes a string with letters in a..z or A..Z as input and shifts
+-- each letter 13 places to the right in the alphabet, whilst keeping its
+-- original case and wrapping around if the end (z/Z) is reached.
 
 module Ass6 where
 import Data.List
