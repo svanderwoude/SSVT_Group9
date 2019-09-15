@@ -2,6 +2,7 @@ module Lab2 where
  
 import Data.List
 import Data.Char
+import Data.Maybe
 import System.Random
 import Test.QuickCheck  
     
@@ -136,7 +137,7 @@ testIsPermutation xs ys = putStrLn ("Testing whether " ++ show xs ++ " and " ++ 
 testRel :: (a -> a -> Bool) -> (a -> a) -> [a] -> Bool
 testRel spec f = all (\x -> spec x (f x))
 
-permP1 = testRel (\xs ys -> length xs == length ys) isPermutation
+--permP1 = testRel (\xs ys -> length xs == length ys) isPermutation
 
 isPermutationTests = do
     testIsPermutation [1,2,3] [3,2,1]
@@ -146,3 +147,51 @@ isPermutationTests = do
     testIsPermutation [1,2,3,4] [3,2,1] -- check dffering lengths
 
 -- TODO: properties
+
+-- Excercise 5
+isDerangement :: [Int] -> [Int] -> Bool
+isDerangement xs ys = isPermutation xs ys && all (\x -> elemIndex x xs /= elemIndex x ys) xs
+
+deran :: Int -> [[Int]]
+deran n = [x | x <- permutations [1..n-1], isDerangement x [1..n-1]]
+
+-- Excercise 6
+-- ROT13(ROT13(x)) = x for any letter in Latin alphabet
+
+az = ['a'..'z']
+
+aZ = ['A'..'Z']
+
+rot13map :: Char -> Char
+rot13map x
+    | x `elem` az = let i = fromJust $ x `elemIndex` az in if i+13<26 then az!!(i+13) else az!!(i-13) 
+    | x `elem` aZ = let i = fromJust $ x `elemIndex` aZ in if i+13<26 then aZ!!(i+13) else aZ!!(i-13)
+    | otherwise = x
+
+rot13 :: String -> String
+rot13 = map rot13map
+
+-- Excercise 7
+charMap :: Char -> Int
+charMap x = fromJust (x `elemIndex` aZ) + 10
+
+headToEnd :: [a] -> [a]
+headToEnd []     = []
+headToEnd (x:xs) = xs ++ [x]
+
+moveToBack :: Int -> String -> String
+moveToBack 0 xs = xs
+moveToBack n xs = moveToBack (n-1) (headToEnd xs)
+
+-- Moves the block of first 4 characters to the back of the list
+ibanPushToBack :: String -> String
+ibanPushToBack = moveToBack 4
+
+-- Replaces every letter with the corresponding number (A -> 10, B -> 11 etc.)
+ibanReplaceLetters :: String -> String
+ibanReplaceLetters = concatMap (\x -> if x `elem` aZ then show (charMap x) else [x])
+
+-- Check if the IBAN is valid. It does not check for IBAN length since it is different per country code.
+-- The maximum length that is allowed is 34, therefore we check only this.
+ibanValidate :: String -> Bool
+ibanValidate iban = read (ibanReplaceLetters (ibanPushToBack iban)) `mod` 97 && length iban < 35 == 1
