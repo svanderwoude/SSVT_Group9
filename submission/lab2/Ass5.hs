@@ -1,12 +1,20 @@
 module Ass5 where
 import Data.List
-import HelperCodeLab1
+import HelperCodeLab2
 import Test.QuickCheck
+import Data.List
 
-exc5primes :: Integer -> [Integer]
-exc5primes x = take 101 $ filter prime [x..]
+-- Check if one list is a derangement of the other list
+isDerangement :: [Integer] -> [Integer] -> Bool
+isDerangement xs ys = isPermutation xs ys && all (\x -> elemIndex x xs /= elemIndex x ys) xs
 
--- create a of sums of 101 consecutive primes starting from a different prime and filter only the results
--- where the sum is also prime, then take the head
-exc5sumFirst101Primes :: Integer
-exc5sumFirst101Primes = head ( filter prime $ map (sum . exc5primes) primes )
+-- Generate all derangements from a list [0..n-1]
+deran :: Integer -> [[Integer]]
+deran n = [p | p <- permutations [0..n-1], isDerangement p [0..n-1]]
+
+-- Test
+testDerangement :: [Integer] -> [Integer] -> Bool -> Bool
+testDerangement xs ys e = isDerangement xs ys == e
+
+testDerangementIO :: [Integer] -> [Integer] -> Bool -> IO()
+testDerangementIO xs ys e = putStrLn ("Check if " ++ show xs ++ " and " ++ show ys ++ " are derangements: " ++ (show $ isDerangement xs ys) ++ " (expected " ++ show e ++ ")")
