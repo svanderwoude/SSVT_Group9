@@ -74,4 +74,3 @@ main = do
     putStrLn "\n\n"
     putStrLn "\nTesting invalid IBAN numbers"
     ibanCheckerInvalidList
-
