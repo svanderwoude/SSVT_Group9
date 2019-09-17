@@ -36,13 +36,15 @@ main = do
     print (sortBy compareProperties [exc3_1, exc3_2, exc3_3, exc3_4, exc3_5])
 
     -- Assignment 4
+    -- Since there are no duplicates in the input lists we create a stricter
+    -- input list, but in turn make the function easier since you do not have
+    -- to count occurrences of numbers, but can simply look at indices.
     putStrLn "\n==== ASSIGNMENT 4 ===="
     testIsPermutationIO [1,2,3] [2,1,3] True
     testIsPermutationIO [1,2] [1,2] True
     testIsPermutationIO [1,2] [1,2,3] False
     testIsPermutationIO [1,2,3,4] [1,2] False
     testIsPermutationIO [1,2,3] [2,3,4] False
-    -- TODO QuickCheck version & definitions
 
     -- Assignment 5
     putStrLn "\n==== ASSIGNMENT 5 ===="
