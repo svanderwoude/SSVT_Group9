@@ -1,6 +1,6 @@
 module Ass3 where
 import Data.List
-import HelperCodeLab1
+import HelperCodeLab2
 import Test.QuickCheck
 
 
