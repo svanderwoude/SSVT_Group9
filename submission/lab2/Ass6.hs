@@ -38,6 +38,7 @@ willLoopProperty x = x == (rot13 (rot13 x))
 rot13Properties :: String -> Bool
 rot13Properties x = inAlphabetProperty x && willLoopProperty x
 
+-- Generates a string of random length with values between ['a'..'z'] or ['A'..'Z']
 data RandomString = RandomString String deriving Show
 instance Arbitrary RandomString where
     arbitrary = fmap RandomString (listOf $ elements (['a'..'z'] ++ ['A'..'Z']))
