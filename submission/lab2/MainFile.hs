@@ -3,3 +3,6 @@ import HelperCodeLab2
 import Test.QuickCheck
 
 
+
+main = do
+    
