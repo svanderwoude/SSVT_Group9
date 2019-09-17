@@ -60,7 +60,6 @@ predicateTwoExercise4 n = (powerset [1..n]) == 2^n
 conditionExercise4 :: Integer -> Bool
 conditionExercise4 n =  (predicateOneExercise4 n) --> (predicateTwoExercise4 n)
 
-
 testExercise4 = quickCheckResult (\ n -> n > 0 && n < 25 --> conditionExercise4 n)
 
 
@@ -123,9 +122,8 @@ conjuctureSixMin :: [Integer]
 conjuctureSixMin = take 1 (conjuctureSix 0 [])
 
 
-
-
-
-
-
---
+-- Excerise
+accuses :: Boy -> Boy -> Bool
+accuses Matthew boyTwo = not (boyTwo == Mattthew) && not (boyTwo == Carl)
+accuses Peter boyTwo = boyTwo == Mattthew || boyTwo == Jack
+accuses Peter Matthew = True
