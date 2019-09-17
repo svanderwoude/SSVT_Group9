@@ -1,6 +1,6 @@
 -- LAB 2
 -- Assignment 7
--- Time: 45 minutes (+ TODO testing)
+-- Time: 1h 30 minutes
 
 module Ass7 where
 import Data.Char
@@ -106,3 +106,28 @@ replaceLetters' c
 
 iban :: String -> Bool
 iban x = checkIbanLength x && checkRemainder (replaceLetters (rotateCharacters x)) == 1
+
+-- Tests
+ibanCheckerResult :: [String] -> Bool -> Bool
+ibanCheckerResult [] _ = True
+ibanCheckerResult xs e = all (==e) [iban x | x <- xs]
+
+-- Test list of valid IBAN numbers
+ibanCheckerValidList = do
+    content <- readFile "valid_iban.txt"
+    let asExpected = ibanCheckerResult (lines content) True
+
+    if asExpected == True then
+        putStrLn ("+++ OK, passed own tests")
+    else
+        putStrLn ("--- ERROR, failed own tests")
+
+-- Test list of invalid IBAN numbers
+ibanCheckerInvalidList = do
+    content <- readFile "invalid_iban.txt"
+    let asExpected = ibanCheckerResult (lines content) False
+
+    if asExpected == True then
+        putStrLn ("+++ OK, passed own tests")
+    else
+        putStrLn ("--- ERROR, failed own tests")

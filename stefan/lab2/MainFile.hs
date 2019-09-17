@@ -12,7 +12,12 @@ import Test.QuickCheck
 
 main = do
     -- Assignment 1
+    -- As we can see from the results, there are roughly 2500 numbers in each
+    -- quartile, meaning that the function is indeed random.
+    -- It also works for higher values of n (instead of 10000), which also
+    -- produce correct results.
     putStrLn "==== ASSIGNMENT 1 ===="
+    quartileCounterResultIO 10000
 
     -- Assignment 2
     putStrLn "\n==== ASSIGNMENT 2 ===="
@@ -57,4 +62,12 @@ main = do
     putStrLn "\n==== ASSIGNMENT 6 ===="
 
     -- Assignment 7
+    -- Testing could be automated, however to do so randomly without a predefined
+    -- list of valid/invalid IBAN numbers (like we did) you would have to
+    -- implement the IBAN-creation algorithm with checksum and such.
     putStrLn "\n==== ASSIGNMENT 7 ===="
+    putStrLn "Testing valid IBAN numbers"
+    ibanCheckerValidList
+
+    putStrLn "\nTesting invalid IBAN numbers"
+    ibanCheckerInvalidList
