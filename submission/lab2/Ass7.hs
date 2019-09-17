@@ -27,11 +27,9 @@ printRot13 number secret = putStrLn (show $ encodeRot13 number secret)
 
 
 -- Question 7 Implementing and testing IBAN validation
--- 4 h 13 min
 
 ibanValidation :: String -> Bool
 ibanValidation iban = validateIBANCountry iban && ibanValidateDigits iban
-
 
 ibanValidateDigits :: String -> Bool
 ibanValidateDigits  xs = 
