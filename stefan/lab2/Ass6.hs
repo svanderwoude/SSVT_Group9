@@ -30,3 +30,10 @@ rot13CharConverter x
         let i = fromMaybe 0 (elemIndex x chars)
         if i + 13 < 26 then chars!!(i+13) else chars!!(i-13)
     | otherwise = x
+
+-- Properties
+inAlphabetProperty :: String -> Bool
+inAlphabetProperty x = all (\y -> elem y ['A'..'Z'] || elem y ['a'..'z']) x
+
+willLoopProperty :: String -> Bool
+willLoopProperty x = x == (rot13 (rot13 x))

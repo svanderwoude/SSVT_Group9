@@ -19,7 +19,7 @@ testIsPermutation xs ys e = isPermutation xs ys == e
 testIsPermutationIO :: [Int] -> [Int] -> Bool -> IO()
 testIsPermutationIO xs ys e = putStrLn ("Check if " ++ show xs ++ " and " ++ show ys ++ " are permutations: " ++ (show $ isPermutation xs ys) ++ " (expected " ++ show e ++ ")")
 
--- Properties:
+-- Properties (nothing done with this yet... im stuck):
 -- 1. All elements in list xs are also in list ys
 isPermutationPropOne :: Eq a => [a] -> [a] -> Bool
 isPermutationPropOne xs ys = all (\x -> elem x ys) xs

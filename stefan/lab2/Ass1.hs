@@ -1,6 +1,6 @@
 -- LAB 2
 -- Assignment 1
--- Time:
+-- Time: 30 minutes
 
 module Ass1 where
 import Data.List
