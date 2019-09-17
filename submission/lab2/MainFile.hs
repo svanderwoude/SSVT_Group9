@@ -23,3 +23,5 @@ main = do
        triangleTests 2 2 3 Isosceles
        triangleTests 10 1 1 NoTriangle
        triangleTests 2 4 3 Other
+
+       putStrLn  "==== ASSIGNMENT 3 ===="

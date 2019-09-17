@@ -31,10 +31,10 @@ isPermutationPropThree xs ys = length xs == length ys
 -- Combine all properties
 permutationProperties :: Eq a => [a] -> [a] -> Bool
 permutationProperties xs ys = isPermutationPropOne xs ys && isPermutationPropTwo xs ys && isPermutationPropThree xs ys
-​
+
 data RandomIntListSmall = RandomIntListSmall [Int] deriving Show
 instance Arbitrary RandomIntListSmall where
     arbitrary = fmap RandomIntListSmall (sublistOf [1..10])
-​
+    
 -- Generate a random list and get all its permutations, then verify the permutation properties
-quickCheckPermutations = quickCheckResult (\(RandomIntListSmall xs) -> let list = nub xs in all (permutationProperties xs) (permutations xs
+quickCheckPermutations = quickCheckResult (\(RandomIntListSmall xs) -> let list = nub xs in all (permutationProperties xs) (permutations xs))
