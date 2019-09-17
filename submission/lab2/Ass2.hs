@@ -2,9 +2,16 @@ module Ass2 where
 import Data.List
 import HelperCodeLab2
 import Test.QuickCheck
+import Data.Char
+import Data.Maybe
+--
+-- data Shape = NoTriangle | Equilateral
+--             | Isosceles  | Rectangular | Other deriving (Eq,Show)
 
-data Shape = NoTriangle | Equilateral
-            | Isosceles  | Rectangular | Other deriving (Eq,Show)
+xor :: Bool -> Bool -> Bool
+xor True False = True
+xor False True = True
+xor _ _ = False
 
 triangle :: Integer -> Integer -> Integer -> Shape
 triangle a b c

@@ -3,6 +3,7 @@ import Data.List
 import HelperCodeLab2
 import Test.QuickCheck
 import Data.List
+import Ass4
 
 -- Check if one list is a derangement of the other list
 isDerangement :: [Integer] -> [Integer] -> Bool

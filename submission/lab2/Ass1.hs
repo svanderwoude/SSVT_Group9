@@ -2,6 +2,8 @@ module Ass1 where
 import Data.List
 import HelperCodeLab2
 import Test.QuickCheck
+import System.IO.Unsafe
+
 
 
 ranges :: [Float] -> (Int,Int,Int,Int) -> (Int,Int,Int,Int)
@@ -38,8 +40,9 @@ checkDifferenceRanges threshold (a, b, c, d) = precentageA && precentageB && pre
 genPositiveIntegers :: Gen Int
 genPositiveIntegers = abs <$> suchThat (arbitrary :: Gen Int) (> 1000)
 
--- 3 as threshold
-testValidityQuartiles amountOfValues = checkDifferenceRanges 3 (unsafePerformIO(countQuartiles amountOfValues))
+-- 5 as threshold, the higher the amount of integers that are generated the smaller the threshold can be, as
+-- little numbers have less precission
+testValidityQuartiles amountOfValues = checkDifferenceRanges 5 (unsafePerformIO(countQuartiles amountOfValues))
 
 -- +++ OK, passed 100 tests.
 -- Success {numTests = 100, labels = [], output = "+++ OK, passed 100 tests.\n"}
