@@ -7,25 +7,6 @@ import System.Random
 import Test.QuickCheck 
 import Data.Maybe
 
-let2int :: Char -> Char -> Int
-let2int c firstLetter = ord c - ord firstLetter
-
-int2let :: Int -> Char -> Char
-int2let n firstLetter = chr (ord firstLetter + n)
-
-shift :: Int -> Char -> Char
-shift n char 
-    | isLower char = int2let (((let2int char 'a') + n) `mod` 26) 'a'
-    | isUpper char = int2let (((let2int char 'A') + n) `mod` 26) 'A'
-    | otherwise = char
-
-encodeRot13 :: Int -> String -> String
-encodeRot13 n xs = [shift n x | x <- xs]
-
-printRot13 :: Int -> String -> IO()
-printRot13 number secret = putStrLn (show $ encodeRot13 number secret)
-
-
 -- Question 7 Implementing and testing IBAN validation
 
 ibanValidation :: String -> Bool
