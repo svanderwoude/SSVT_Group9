@@ -45,3 +45,11 @@ ex32 = NamedFunction "even x || x > 3" e32
 ex33 = NamedFunction "(even x && x > 3) || even x" e33
 ex34 = NamedFunction "(even x && x > 3) || even x" e34
 ex35 = NamedFunction "even" e35
+
+-- Order the properties starting from the strongest one and going to the weakest one
+-- Output: [even x && x > 3,
+--          (even x && x > 3) || even x,
+--          (even x && x > 3) || even x,
+--          even,
+--          even x || x > 3]
+orderProps = sortBy (flip compareProps) [ex31, ex32, ex33, ex34, ex35]

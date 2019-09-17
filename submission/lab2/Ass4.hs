@@ -35,6 +35,6 @@ permutationProperties xs ys = isPermutationPropOne xs ys && isPermutationPropTwo
 data RandomIntListSmall = RandomIntListSmall [Int] deriving Show
 instance Arbitrary RandomIntListSmall where
     arbitrary = fmap RandomIntListSmall (sublistOf [1..10])
-    
+
 -- Generate a random list and get all its permutations, then verify the permutation properties
 quickCheckPermutations = quickCheckResult (\(RandomIntListSmall xs) -> let list = nub xs in all (permutationProperties xs) (permutations xs))

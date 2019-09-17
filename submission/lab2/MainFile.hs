@@ -8,7 +8,6 @@ import Ass4
 import Ass5
 import Ass6
 import Ass7
-import Ass8
 
 
 
@@ -25,3 +24,17 @@ main = do
        triangleTests 2 4 3 Other
 
        putStrLn  "==== ASSIGNMENT 3 ===="
+       print orderProps
+
+       putStrLn  "==== ASSIGNMENT 4 ===="
+       putStrLn  "For the properties see assigment 4 file"
+       -- quickCheckPermutations = quickCheckResult (\(RandomIntListSmall xs) -> let list = nub xs in all (permutationProperties xs) (permutations xs))
+       quickCheckPermutations
+
+       putStrLn  "==== ASSIGNMENT 5 ===="
+       quickCheckIsDerangement
+
+       putStrLn  "==== ASSIGNMENT 6 ===="
+
+
+       putStrLn  "==== ASSIGNMENT 7 ===="
