@@ -68,4 +68,9 @@ main = do
     putStrLn "\n==Ex 7 ==\n"
     printvalidateIBAN "GB82 WEST 1234 5698 7654 32"
     printvalidateIBAN "GB82 WEST 1234 5698 7654 3"
-
+    putStrLn "\n\n"
+    putStrLn "Testing valid IBAN numbers"
+    ibanCheckerValidList
+    putStrLn "\n\n"
+    putStrLn "\nTesting invalid IBAN numbers"
+    ibanCheckerInvalidList
