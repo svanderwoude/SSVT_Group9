@@ -1,11 +1,13 @@
 module Main where
-
-import Lib
-import Propreverse
+-- Antonino Sauleo
+--import Lib
+--import Propreverse
+import Lab2
 import Test.QuickCheck
 import Data.Char
 import Data.List
 import Debug.Trace
+import System.Random
 
 
 -- For testing 
@@ -23,38 +25,47 @@ genSmallIntegersForPrime = abs <$> (arbitrary :: Gen Integer) `suchThat` (\x -> 
 
 main :: IO ()
 main = do
-    --putStrLn "\n== Proof (Success) ==\n"
-    --quickCheck prop_RevRev
-    --putStrLn "\n=== Proof induction (Fail) ==\n"
-    --quickCheck testSumOdds
-
-    -- Test Lab 1 - Workshop excercise 2 ---- 43 min.
-    putStrLn "\n==LAB 1 workshop#2 ==\n"
-    quickCheck $ forAll genPositiveIntegers testSumSquares
+    -- Assignment 2
+    -- Excercise 1
+    putStrLn "\n==Ex 1 ==\n"
+    x <- fmap (countQ (Qt 0 0 0 0 0)) (probs 10000)
+    print x
+    
     putStrLn "\n\n"
 
-    -- Test Lab 1 - Workshop excercise 3 ---- 6 min.
-    putStrLn "\n==LAB 1 workshop#3 ==\n"
-    quickCheck $ forAll genPositiveIntegers testSumCubes
+    -- Excercise 2
+    putStrLn "\n==Ex 2 ==\n"
+    printTriangleTypeIO 0 0 0 NotaTriangle
+    printTriangleTypeIO 0 0 1 NotaTriangle
+    printTriangleTypeIO 0 1 1 NotaTriangle
+    printTriangleTypeIO (-1) 1 0 NotaTriangle
+    printTriangleTypeIO 1 1 3 NotaTriangle
+    printTriangleTypeIO 5 5 5 Equilateral
+    printTriangleTypeIO 1 1 2 Isosceles
+    printTriangleTypeIO 3 4 5 Rectangular
+    printTriangleTypeIO 1 2 3 Other
     putStrLn "\n\n"
 
-    -- Test Lab 2 - Workshop excercise 4 ---- 1 hour 15 min.
-    putStrLn "\n==LAB 2 workshop#4 ==\n"
-    quickCheck $ forAll genSmallIntegers testPowerSet
+    -- Excercise 3
+    putStrLn "\n==Ex 3 ==\n"
+    putStrLn "== A ==\n"
+    let domain = [(-10)..10]
+    print $ "Test 1 is " ++ if stronger domain e1 even then "stronger" else "weaker"
+    print $ "Test 2 is " ++ if stronger domain e2 even then "stronger" else "weaker"
+    print $ "Test 3 is " ++ if stronger domain e3 even then "stronger" else "weaker"
+    print $ "Test 4 is " ++ if stronger domain e4 even then "stronger" else "weaker"
+    putStrLn "\n\n"
+    -- BBBBBBB
+    --exerciseThreeB
+
+
+    -- Excercise 6
+    putStrLn "\n==Ex 6 ==\n"
+    printRot13 3 "haskell is fun"
     putStrLn "\n\n"
 
-    -- Test Lab 3 - Workshop excercise 4 ----  35 min.
-    putStrLn "\n==LAB 2 workshop#4 ==\n"
-    quickCheck $ forAll genSmallIntegers testNumberOfPermutations
-    putStrLn "\n\n"
-
-    -- Test Lab 4 - Workshop excercise 5 ----  xx min.
-    -- putStrLn "\n==LAB 2 workshop#4 ==\n"
-    -- quickCheck $ forAll genSmallIntegersForPrime testPrimeReversal
-    -- putStrLn "\n\n"
-
-
-
-
-
+    -- Excercise 7
+    putStrLn "\n==Ex 7 ==\n"
+    printvalidateIBAN "GB82 WEST 1234 5698 7654 32"
+    printvalidateIBAN "GB82 WEST 1234 5698 7654 3"
 
