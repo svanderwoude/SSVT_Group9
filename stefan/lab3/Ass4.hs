@@ -1,9 +1,8 @@
 -- LAB 3
 -- Assignment 4
--- Time: 1 hour (so far)
+-- Time: 2 hours (so far)
 
 module Ass4 where
-import Control.Monad
 import Data.List
 import HelperCodeLab3
 import System.Random
@@ -52,10 +51,10 @@ logicGenerator' n i k
         logic1 <- logicGenerator (i + 1)
         logic2 <- logicGenerator (i + 1)
         return ("(" ++ logic1 ++ "==>" ++ logic2 ++ ")")  -- Impl
-    | i <= k && n == 6 = do
+    | i == 0 = do
         logic1 <- logicGenerator (i + 1)
         logic2 <- logicGenerator (i + 1)
-        return ("(" ++ logic1 ++ "<=>" ++ logic2 ++ ")")  -- Equiv
+        return ("(" ++ logic1 ++ "<=>" ++ logic2 ++ ")")  -- Equiv (only once in first level)
     | otherwise = return (show i)
 
 -- Form generator using logicGenerator

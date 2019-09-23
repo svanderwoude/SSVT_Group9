@@ -3,6 +3,7 @@
 -- Time:
 
 module Ass2 where
+import Ass4
 import Data.List
 import HelperCodeLab3
 import System.Random
