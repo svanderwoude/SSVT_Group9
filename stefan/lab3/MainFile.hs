@@ -13,7 +13,7 @@ main = do
     putStrLn ("Test equivalence: " ++ show testEquiv)
 
     putStrLn "\n==== ASSIGNMENT 2 ===="
-    -- TODO add negatives & invalid formulas & automated tests
+    -- TODO automated tests
     putStrLn ("Test manual prop: " ++ show (testManual "1" [Prop 1]))
     putStrLn ("Test manual neg: " ++ show (testManual "-1" [Neg (Prop 1)]))
     putStrLn ("Test manual cnj: " ++ show (testManual "*(1 2)" [Cnj [Prop 1, Prop 2]]))
@@ -23,7 +23,9 @@ main = do
     putStrLn ("Test manual invalid: " ++ show (testManual "+-1" []))
 
     putStrLn "\n==== ASSIGNMENT 3 ===="
+    -- TODO complete(?) & test using ass4
 
     putStrLn "\n==== ASSIGNMENT 4 ===="
+    -- TODO test ass3
 
     putStrLn "\n==== ASSIGNMENT 5 ===="
