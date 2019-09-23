@@ -71,7 +71,14 @@ cnf (Impl f1 f2) = arrowfree (Impl f1 f2)
 cnf (Equiv f1 f2) = arrowfree (Equiv f1 f2)
 cnf (Neg fs) = (nnf.arrowfree) (Neg fs)
 cnf (Cnj fs) = Cnj (map cnf fs)
-cnf (Dsj (Cnj ys):fs) = Cnj map (\y -> Dsj (fs++y)) ys
-    
--- Dsj [Cnj [(Prop x), (Prop y)], (Prop z)]
--- Cnj [Dsj [(Prop x), (Prop z)], Dsj [(Prop y), (Prop z)]]
+-- cnf (Dsj ((Cnj ys):(Prop x):fs)) = Cnj (((map cnf fs) ++ [Dsj ((map cnf ys) ++ [Prop x])]))
+--cnf (Dsj ((Cnj ys):(Prop x):fs)) = Cnj ((map cnf fs) ++ (map (\y -> Dsj [Prop x, cnf y]) (map cnf ys)))
+--cnf (Dsj ((Prop x):(Cnj ys):fs)) = Cnj ((map cnf fs) ++ (map (\y -> Dsj [Prop x, cnf y]) (map cnf ys)))
+cnf (Dsj ((Cnj xs):fs)) = Cnj (map (\(x, f) -> Dsj [cnf x, cnf f]) (zip xs fs))
+cnf (Dsj fs) = Dsj (map cnf fs)
+
+--Dsj [Cnj [1,2], Prop 3, 4]
+--Dsj [Cnj [Prop 1,Dsj [Cnj [Prop 1, Prop 2], Prop 3]], Prop 3]
+
+
+--(1 ^ ((1 ^ 2) v 3)) v 3
