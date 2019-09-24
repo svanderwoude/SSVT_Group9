@@ -90,12 +90,12 @@ main = do
     putStrLn "\n\n"
 
     putStrLn "\nEntails is : "
-    let ent = (Dsj [p, Neg q])
-    print $ testEntails p ent
-    putStrLn "\n\n"
+    --let ent = (Dsj [p, Neg q])
+    --putStrLn "\n\n"
 
     putStrLn "\n==Ex 5 ==\n"
     let formula = Impl (Cnj [Neg (Dsj [Prop 1, Prop 2]), Prop 3]) (Prop 4)
     printnsub formula
     printnsub contradiction
     printnsub tauto
+    print $ sub formula

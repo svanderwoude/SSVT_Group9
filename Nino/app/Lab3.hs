@@ -265,6 +265,7 @@ nnf (Neg (Dsj fs)) = Cnj (map (nnf.Neg) fs)
 
 -- Excercise #1
 -- A contradiction consists of a logical incompatibility between two or more propositions (i.e. when it is not satified by any valuation)
+-- time 3 h 43 min
 contradiction :: Form -> Bool
 contradiction p = not (satisfiable p)
 
@@ -296,7 +297,7 @@ testTautology f = (tautology f == all (\v -> evl v f) (allVals f))
 
 
 -- Excercise 5
-
+-- 2 h 15 min so far
 sub :: Form -> Set Form
 sub (Prop x) = Set [Prop x]
 sub (Neg f) = unionSet (Set [Neg f]) (sub f)
@@ -306,6 +307,11 @@ sub f@(Impl f1 f2) = unionSet ( unionSet (Set [f]) (sub f1)) (sub f2)
 sub f@(Equiv f1 f2) = unionSet ( unionSet (Set [f]) (sub f1)) (sub f2)
 
 -- How can you prove that the sub implementation is correct? Test the implementation with two QuickCheck properties.
+-- The subformulas of a proposition are defined as follows:
+-- A propositional letter P or a constant t or f has itself as its only subformula.
+-- A proposition of the form ¬P has as subfomulas itself and all the subformulas of P.
+-- A proposition of the form P & Q, P ∨ Q, P → Q, or P ↔ Q has as subformulas itself and all
+-- the subformulas of P and Q.
 
 -- Write a recursive implementation of the function nsub :: Form -> Int such that nsub f computes the exact number of 
 -- sub-formulae of the formula f. Test your implementation using Quickcheck.
