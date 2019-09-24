@@ -136,6 +136,8 @@ main = do
     --
     -- TODO finish
     -- & manual testing of expectations
+    putStrLn "Testing CNF converter (1): "
+    quickCheckCNF
 
 
     putStrLn "\n==== ASSIGNMENT 4 ===="
@@ -143,6 +145,8 @@ main = do
     --
     -- TODO define properties
     -- & automated testing to see if outcome is the same as pre-CNF
+    putStrLn "Testing CNF converter (2): "
+    quickCheckCNF
 
 
     putStrLn "\n==== ASSIGNMENT 5 ===="
