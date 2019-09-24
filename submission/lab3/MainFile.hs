@@ -143,7 +143,17 @@ main = do
     putStrLn "\n==== ASSIGNMENT 4 ===="
     -- Testing of the CNF converter: see assignment 3.
     --
-    -- TODO define properties
+    -- We can define a number of properties for CNF fomulas. First of all, like
+    -- the name suggests, a CNF formula is a conjuction of one or more clauses.
+    -- This means that the ouput of the CNF converter should be of this form.
+    -- Another property we can also get from this is that a CNF formula should
+    -- only contain AND and OR statements (Dsj and Cnj), besides Prop and
+    -- Neg (only for single Props).
+    --
+    -- An important property of the converter is that, no matter if the
+    -- conversion is completely correct or not, the input formula should
+    -- produce the same results as the output formala. This is also explained in
+    -- assignment 3 and tested.
     putStrLn "Testing CNF converter (2): "
     quickCheckCNF
 
