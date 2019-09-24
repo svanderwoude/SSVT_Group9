@@ -73,7 +73,7 @@ main = do
     -- can see if the parser output is in lign with our expectations.
     --
     -- Secondly, we could add a set of automatic tests. The best way to do this
-    -- is by generating a set of random formulas using our random formula 
+    -- is by generating a set of random formulas using our random formula
     -- generator from assignment 4. Since we know that this formula generator
     -- will always produce correct forms and/or logic strings, we can use it to
     -- test whether the parser is also able to parse it. Thus in the case of
@@ -182,7 +182,11 @@ main = do
     putStrLn "\n==== ASSIGNMENT 5 ===="
     -- Test whether all elements in created set are also present in original
     -- form. Using another way to get those elements
-    putStrLn "\nTesting sub property of containing all correct sets: "
+    putStrLn "\nTesting sub properties of containing all correct sets: "
+    putStrLn "\nProperty one: "
+    quickCheckTestSetPropertyOne
+
+    putStrLn "\nProperty two: "
     quickCheckTestSetPropertyTwo
 
     -- In order to test the implementation of nsub', we could use an alternative
