@@ -91,3 +91,18 @@ testSet s (Equiv f g) = inSet (Equiv f g) s && testSet' s f g && inSet f s && in
 testSet' :: Set Form -> Form -> Form -> Bool
 testSet' s f g = testSet s f && testSet s g
 
+
+-- Test nsub' by getting form length
+quickCheckTestNsub  = quickCheckResult (\(RandomForm f) -> testnsub' f)
+
+testnsub' :: Form -> Bool
+testnsub' f = nsub f == formLength f 0
+
+formLength :: Form -> Int -> Int
+formLength (Prop x) n = n + 1
+formLength (Neg f) n = (formLength f n) + (n + 1)
+formLength f@(Cnj [f1,f2]) n = (formLength f1 n) + (formLength f2 n) + (n + 1)
+formLength f@(Dsj [f1,f2]) n = (formLength f1 n) + (formLength f2 n) + (n + 1)
+formLength f@(Impl f1 f2) n = (formLength f1 n) + (formLength f2 n) + (n + 1)
+formLength f@(Equiv f1 f2) n = (formLength f1 n) + (formLength f2 n) + (n + 1)
+

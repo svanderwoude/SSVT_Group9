@@ -184,3 +184,13 @@ main = do
     -- form. Using another way to get those elements
     putStrLn "\nTesting sub property of containing all correct sets: "
     quickCheckTestSetPropertyTwo
+
+    -- In order to test the implementation of nsub', we could use an alternative
+    -- way of determining the number of sub-formulas in a form just like we did
+    -- in one of the properties of part 1. This way we can determine if the
+    -- function returns the correct number of properties.
+    --
+    -- NOTE: it appears that sometimes our quickCheckTestNsubfails, but it
+    -- works in many other cases... Didn't have enough time to fix it.
+    putStrLn "\nTesting nsub' length correctness: "
+    quickCheckTestNsub
