@@ -134,10 +134,20 @@ main = do
     -- output. We will test this by checking if they are equivalent using the
     -- equivalent method from assignment 1.
     --
-    -- TODO finish
-    -- & manual testing of expectations
-    putStrLn "Testing CNF converter (1): "
+    -- NOTE: it appears that sometimes our quickCheckCNF gets stuck, but it
+    -- works in many other cases... Didn't have enough time to fix it.
+    -- (Non-exhaustive patterns in function isCnf)
+    --
+    -- TODO finish correctly
+    testCnfIO (Dsj [Cnj [Prop 1, Prop 2], Prop 3]) (Cnj [Dsj [Prop 1, Prop 3], Dsj [Prop 2, Prop 3]])
+    testCnfIO (Cnj [Dsj [Prop 1, Prop 3], Dsj [Prop 2, Prop 3]]) (Cnj [Dsj [Prop 1, Prop 3], Dsj [Prop 2, Prop 3]])
+    testCnfIO (Prop 1) (Prop 1)
+    testCnfIO (Dsj [Cnj [Neg (Prop 1), Prop 2], Prop 3]) (Cnj [Dsj [Neg (Prop 1), Prop 3], Dsj [Prop 2, Prop 3]])
+
+    putStrLn "\nTesting CNF converter (1): "
     quickCheckCNF
+    -- Testing CNF converter (1):
+    -- +++ OK, passed 100 tests.
 
 
     putStrLn "\n==== ASSIGNMENT 4 ===="
@@ -154,8 +164,19 @@ main = do
     -- conversion is completely correct or not, the input formula should
     -- produce the same results as the output formala. This is also explained in
     -- assignment 3 and tested.
-    putStrLn "Testing CNF converter (2): "
+    --
+    -- NOTE: it appears that sometimes our quickCheckCNF gets stuck, but it
+    -- works in many other cases... Didn't have enough time to fix it.
+    -- (Non-exhaustive patterns in function isCnf)
+    testCnfIO (Dsj [Cnj [Prop 1, Prop 2], Prop 3]) (Cnj [Dsj [Prop 1, Prop 3], Dsj [Prop 2, Prop 3]])
+    testCnfIO (Cnj [Dsj [Prop 1, Prop 3], Dsj [Prop 2, Prop 3]]) (Cnj [Dsj [Prop 1, Prop 3], Dsj [Prop 2, Prop 3]])
+    testCnfIO (Prop 1) (Prop 1)
+    testCnfIO (Dsj [Cnj [Neg (Prop 1), Prop 2], Prop 3]) (Cnj [Dsj [Neg (Prop 1), Prop 3], Dsj [Prop 2, Prop 3]])
+
+    putStrLn "\nTesting CNF converter (2): "
     quickCheckCNF
+    -- Testing CNF converter (2):
+    -- +++ OK, passed 100 tests.
 
 
     putStrLn "\n==== ASSIGNMENT 5 ===="
