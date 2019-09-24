@@ -63,19 +63,56 @@ equiv f1 f2 = tautology (Equiv f1 f2)
 -- nnf (Neg (Cnj fs)) = Dsj (map (nnf.Neg) fs)
 -- nnf (Neg (Dsj fs)) = Cnj (map (nnf.Neg) fs)
 
+-- cnf (Prop x) = Prop x
+-- cnf (Neg f) = Neg (cnf f)
+-- cnf (Dsj [Cnj [x,y],z]) = Cnj [cnf (Dsj [z,x]), cnf (Dsj [z,y])]
+-- cnf (Cnj [z, Cnj [x, y]]) = Cnj [cnf (Dsj [z,x]), cnf (Dsj [z,y])]
+-- cnf (Cnj fs) = Dsj (map cnf fs)
+-- cnf (Dsj fs) = Dsj (map cnf fs)
+
+
 -- Excercise 3
--- Time spent: 1h
+-- Time spent: 1d 
+
+-- First, we clean up --> and <-> and we push negations inwards such that only atoms are negated.
 cnf :: Form -> Form
-cnf (Prop x) = Prop x
-cnf (Impl f1 f2) = arrowfree (Impl f1 f2) 
-cnf (Equiv f1 f2) = arrowfree (Equiv f1 f2)
-cnf (Neg fs) = (nnf.arrowfree) (Neg fs)
-cnf (Cnj fs) = Cnj (map cnf fs)
--- cnf (Dsj ((Cnj ys):(Prop x):fs)) = Cnj (((map cnf fs) ++ [Dsj ((map cnf ys) ++ [Prop x])]))
---cnf (Dsj ((Cnj ys):(Prop x):fs)) = Cnj ((map cnf fs) ++ (map (\y -> Dsj [Prop x, cnf y]) (map cnf ys)))
---cnf (Dsj ((Prop x):(Cnj ys):fs)) = Cnj ((map cnf fs) ++ (map (\y -> Dsj [Prop x, cnf y]) (map cnf ys)))
-cnf (Dsj ((Cnj xs):fs)) = Cnj (map (\(x, f) -> Dsj [cnf x, cnf f]) (zip xs fs))
-cnf (Dsj fs) = Dsj (map cnf fs)
+cnf f = cnf' ((nnf.arrowfree) f)
+
+cnf' :: Form -> Form
+-- A property results in itself
+cnf' (Prop x) = Prop x
+-- A negated property results in itself. It is not possible to have a negated formula (Cnj|Dsj), since we call
+-- this function with NNF propisition already 
+cnf' (Neg p) = Neg p
+-- If there is Cnj over Cnj, this can be replaced with a single Cnj. For example, P && (Q && R) is equal to
+-- P && Q && R. The pattern match does not seem to work
+cnf' (Cnj ((Cnj xs):fs)) = Cnj (map cnf' (xs ++ fs))
+cnf' (Cnj fs) = Dsj (map cnf fs)
+-- If there is Dsj over Cnj, we have to convert it by applying distributive law. For example, P || (Q && R), should
+-- result in (P || Q) && (P || R). This pattern would only match a case where the Cnj is the first element, however
+-- if it is in any place of the list of the disjunction, the same rule should be applied (Not sure how to do that).
+cnf' (Dsj ((Cnj xs):fs)) = Cnj (map (\(x, f) -> Dsj [cnf' x, cnf' f]) [(x, f) | x <- xs, f <- fs])
+-- Any other Dsj is just itself with converting its members to cnf.
+cnf' (Dsj fs) = Dsj (map cnf' fs)
+
+-- isCnf is used in converting to cnf as a form must be checked over and over
+-- untill it is cnf, if not it has to be rerun (as this runs inward it can take
+-- a long time for long forms). DOESN'T CHECK CORRECTLY
+isCnf :: Form -> Bool
+isCnf (Prop x) = True
+isCnf (Neg (Prop x)) = True
+isCnf (Neg _) = False
+isCnf (Dsj xs) = not (any containsCnj xs) && all containsCnj xs
+isCnf (Cnj xs) = all containsCnj xs
+
+
+-- Simple function that checks if an element is a conjucntion.
+containsCnj :: Form -> Bool
+containsCnj (Cnj xs) = True
+containsCnj _ = False
+
+toCnf :: Form -> Form
+toCnf f = while (not . isCnf) cnf f
 
 --Dsj [Cnj [1,2], Prop 3, 4]
 --Dsj [Cnj [Prop 1,Dsj [Cnj [Prop 1, Prop 2], Prop 3]], Prop 3]
