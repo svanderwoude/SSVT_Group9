@@ -94,8 +94,6 @@ main = do
     -- form (token) objects at the same time. This way we could afterwards
     -- compare the generated form object with the parsed version of the logic
     -- string in order to figure out if it was succesfully parsed by the parser.
-    --
-    -- (TODO if enough time, create the generator mentioned above)
 
     -- Manually test Prop parsing
     putStrLn ("Test manual prop: " ++ show (testManual "1" [Prop 1]))
@@ -137,8 +135,6 @@ main = do
     -- NOTE: it appears that sometimes our quickCheckCNF gets stuck, but it
     -- works in many other cases... Didn't have enough time to fix it.
     -- (Non-exhaustive patterns in function isCnf)
-    --
-    -- TODO finish correctly
     testCnfIO (Dsj [Cnj [Prop 1, Prop 2], Prop 3]) (Cnj [Dsj [Prop 1, Prop 3], Dsj [Prop 2, Prop 3]])
     testCnfIO (Cnj [Dsj [Prop 1, Prop 3], Dsj [Prop 2, Prop 3]]) (Cnj [Dsj [Prop 1, Prop 3], Dsj [Prop 2, Prop 3]])
     testCnfIO (Prop 1) (Prop 1)
