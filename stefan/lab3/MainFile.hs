@@ -57,22 +57,67 @@ main = do
 
 
     putStrLn "\n==== ASSIGNMENT 2 ===="
-    -- TODO automated tests
+    -- In order to test the provided parser we can use a number of methods.
+    -- First of all, we can create manual tests in order to test whether the
+    -- provided logic strings are parsed as expected by the parser. This way we
+    -- can see if the parser output is in lign with our expectations.
+    --
+    -- Secondly, we could add a set of automatic tests. The best way to do this
+    -- is by generating a set of random formulas using our random formula 
+    -- generator from assignment 4. Since we know that this formula generator
+    -- will always produce correct forms and/or logic strings, we can use it to
+    -- test whether the parser is also able to parse it. Thus in the case of
+    -- automated testing we can not test whether the resulting formula is
+    -- exactly the same as the input string, but we can test whether it detects
+    -- both correct and incorrect formula strings.
+    --
+    -- Another seemingly logical way to test this using our form generator is to
+    -- see if the created formGenerator produces the same result as the parsed
+    -- version of logicGenerator output. However, this wouldn't be useful since
+    -- our implementation of formGenerator uses the parser to create a form
+    -- object itself, meaning that in case of a comparison we would execute the
+    -- same exact operation on the same input...
+    --
+    -- However, there is another way in which we could automatically test the
+    -- parser. In order to do so we would have to create a new formula generator
+    -- which does not generate logic string, but generates both logic string and
+    -- form (token) objects at the same time. This way we could afterwards
+    -- compare the generated form object with the parsed version of the logic
+    -- string in order to figure out if it was succesfully parsed by the parser.
+    --
+    -- (TODO if enough time, create the generator mentioned above)
+
+    -- Manually test Prop parsing
     putStrLn ("Test manual prop: " ++ show (testManual "1" [Prop 1]))
+
+    -- Manually tests Neg parsing
     putStrLn ("Test manual neg: " ++ show (testManual "-1" [Neg (Prop 1)]))
+
+    -- Manually test Cnj parsing
     putStrLn ("Test manual cnj: " ++ show (testManual "*(1 2)" [Cnj [Prop 1, Prop 2]]))
+
+    -- Manually test Dsj parsing
     putStrLn ("Test manual dsj: " ++ show (testManual "+(1 2)" [Dsj [Prop 1, Prop 2]]))
+
+    -- Manually test Impl parsing
     putStrLn ("Test manual impl: " ++ show (testManual "(1==>2)" [Impl (Prop 1) (Prop 2)]))
+
+    -- Manually test Equiv parsing
     putStrLn ("Test manual equiv: " ++ show (testManual "(1<=>2)" [Equiv (Prop 1) (Prop 2)]))
+
+    -- Manually test invalid formulas
     putStrLn ("Test manual invalid: " ++ show (testManual "+-1" []))
 
 
     putStrLn "\n==== ASSIGNMENT 3 ===="
-    -- TODO complete(?) & test using ass4
+    -- TODO finish
+    -- & manual testing of expectations
 
 
     putStrLn "\n==== ASSIGNMENT 4 ===="
-    -- TODO test ass3
+    -- TODO define properties
+    -- & automated testing to see if outcome is the same as pre-CNF
 
 
     putStrLn "\n==== ASSIGNMENT 5 ===="
+    -- TODO testing both 1 and 2
