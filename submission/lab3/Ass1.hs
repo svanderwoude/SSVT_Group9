@@ -1,7 +1,3 @@
--- LAB 3
--- Assignment 1
--- Time: 2h
-
 module Ass1 where
 import Data.List
 import HelperCodeLab3
