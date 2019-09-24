@@ -190,7 +190,7 @@ main = do
     -- in one of the properties of part 1. This way we can determine if the
     -- function returns the correct number of properties.
     --
-    -- NOTE: it appears that sometimes our quickCheckTestNsubfails, but it
+    -- NOTE: it appears that sometimes our quickCheckTestNsub fails, but it
     -- works in many other cases... Didn't have enough time to fix it.
     putStrLn "\nTesting nsub' length correctness: "
     quickCheckTestNsub

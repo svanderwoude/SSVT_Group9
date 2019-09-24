@@ -100,9 +100,9 @@ testnsub' f = nsub f == formLength f 0
 
 formLength :: Form -> Int -> Int
 formLength (Prop x) n = n + 1
-formLength (Neg f) n = (formLength f n) + (n + 1)
-formLength f@(Cnj [f1,f2]) n = (formLength f1 n) + (formLength f2 n) + (n + 1)
-formLength f@(Dsj [f1,f2]) n = (formLength f1 n) + (formLength f2 n) + (n + 1)
-formLength f@(Impl f1 f2) n = (formLength f1 n) + (formLength f2 n) + (n + 1)
-formLength f@(Equiv f1 f2) n = (formLength f1 n) + (formLength f2 n) + (n + 1)
+formLength (Neg f) n = (formLength f 0) + (n + 1)
+formLength f@(Cnj [f1,f2]) n = (formLength f1 0) + (formLength f2 0) + (n + 2)
+formLength f@(Dsj [f1,f2]) n = (formLength f1 0) + (formLength f2 0) + (n + 2)
+formLength f@(Impl f1 f2) n = (formLength f1 0) + (formLength f2 0) + (n + 2)
+formLength f@(Equiv f1 f2) n = (formLength f1 0) + (formLength f2 0) + (n + 2)
 
