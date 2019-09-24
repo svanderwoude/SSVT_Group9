@@ -50,9 +50,29 @@ nsub' :: Set Form -> Int -> Int
 nsub' (Set []) n = n
 nsub' (Set (x:xs)) n = nsub' (Set xs) (n + 1)
 
+-- PROPERTY: A set X is a subset of Y if and only if their union is equal to Y (see testSetPropertyOne).
+-- We were looking for a way to get a union of the subset (X) with the superset (Y).
+-- We noticed that we could use unionSet for this, however, then we would the same function as sub uses.
+-- This could mean that if the unionSet function is not working, this would not be clearly represented by
+-- our tests.
+-- Furthermore, we were thinking of iterating of iterating the superset by using !!!. We didn't
+-- do this as we are not able to track when the superset ends.
+-- Eventually, we chose to use the inSet function, which returns true when the subset is in the
+-- superset. Due to the type signature of the inSet function there is no further need for iteration through
+-- the superset.
+-- Namely: inSet  :: (Ord a) => a -> Set a -> Bool
+-- With a :: From in our case.
+-- *Ass5> quickCheckTestSetPropertyOne
+-- +++ OK, passed 100 tests.
+-- Success {numTests = 100, labels = [], output = "+++ OK, passed 100 tests.\n"}
+-- *Ass5>
 
--- A set X is a subset of Y if and only if their union is equal to Y.
--- testSetProportyOne f = compare (unionSet (sub f) f) (list2set f)
+testSetPropertyOne :: Form -> Bool
+testSetPropertyOne f = inSet f (sub f)
+
+
+quickCheckTestSetPropertyOne = quickCheckResult (\(RandomForm f) -> testSetPropertyOne f)
+
 
 
 -- A finite set X is a subset of Y if and only if the cardinality of their intersection is equal to the cardinality of X.
@@ -90,4 +110,3 @@ testSet s (Equiv f g) = inSet (Equiv f g) s && testSet' s f g && inSet f s && in
 
 testSet' :: Set Form -> Form -> Form -> Bool
 testSet' s f g = testSet s f && testSet s g
-
