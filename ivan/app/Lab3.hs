@@ -87,7 +87,7 @@ cnf' (Neg p) = Neg p
 -- If there is Cnj over Cnj, this can be replaced with a single Cnj. For example, P && (Q && R) is equal to
 -- P && Q && R. The pattern match does not seem to work
 cnf' (Cnj ((Cnj xs):fs)) = Cnj (map cnf' (xs ++ fs))
-cnf' (Cnj fs) = Dsj (map cnf fs)
+cnf' (Cnj fs) = Cnj (map cnf fs)
 -- If there is Dsj over Cnj, we have to convert it by applying distributive law. For example, P || (Q && R), should
 -- result in (P || Q) && (P || R). This pattern would only match a case where the Cnj is the first element, however
 -- if it is in any place of the list of the disjunction, the same rule should be applied (Not sure how to do that).
@@ -102,8 +102,8 @@ isCnf :: Form -> Bool
 isCnf (Prop x) = True
 isCnf (Neg (Prop x)) = True
 isCnf (Neg _) = False
-isCnf (Dsj xs) = not (any containsCnj xs)
-isCnf (Cnj xs) = all containsCnj xs
+isCnf (Dsj xs) = not (any containsCnj xs)  -- Correct?
+isCnf (Cnj xs) = not (any containsCnj xs)  -- Correct?
 
 
 -- Simple function that checks if an element is a conjucntion.
