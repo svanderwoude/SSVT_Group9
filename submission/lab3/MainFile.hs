@@ -144,7 +144,6 @@ main = do
     -- Testing of the CNF converter: see assignment 3.
     --
     -- TODO define properties
-    -- & automated testing to see if outcome is the same as pre-CNF
     putStrLn "Testing CNF converter (2): "
     quickCheckCNF
 
