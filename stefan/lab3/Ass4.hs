@@ -27,12 +27,21 @@ getRandNum = randomRIO (1, 6)
 logicGenerator :: Int -> IO String
 logicGenerator i = do
     n <- getRandNum
-    logic <- logicGenerator' n i 10  -- Maximum recursion depth set to 10
+    -- Maximum recursion depth set to 10, no need for variable values since it
+    -- is a property of our generator to have this limit.
+    logic <- logicGenerator' n i 10
     return logic
 
 -- Generating the structure of the logic is done in this function. This is also
 -- managed by a limiter k, with the value of i being the current recursion depth.
 -- This value is also used for all properties in the current recursion depth.
+--
+-- Although we are not 100% certain on this, we believe that the equivalence
+-- can only occur on the base level (first iteration) of a formula. However we
+-- do for example know that the implies sub-formula can occur at any level in a
+-- formula. The generator is flexible enough to easily be changed. If this is
+-- not a correct property the i == 0 part in the Equiv guard can be replaced by
+-- i <= k && n == 6 instead.
 logicGenerator' :: Int -> Int -> Int -> IO [Char]
 logicGenerator' n i k
     | i <= k && n == 1 = return (show i)  -- Prop

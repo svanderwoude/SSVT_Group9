@@ -102,7 +102,7 @@ isCnf :: Form -> Bool
 isCnf (Prop x) = True
 isCnf (Neg (Prop x)) = True
 isCnf (Neg _) = False
-isCnf (Dsj xs) = not (any containsCnj xs) && all containsCnj xs
+isCnf (Dsj xs) = not (any containsCnj xs)
 isCnf (Cnj xs) = all containsCnj xs
 
 
