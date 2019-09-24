@@ -38,6 +38,16 @@ main = do
     -- the correct results for each formula, no matter the complexity, it will
     -- have no added value to create overly complex formulas since they will act
     -- the same as more simple formulas.
+    --
+    -- However, as we will see in assignment 3, we can use the equivalence
+    -- method in order to test the correctness of the CNF converter. We also
+    -- confirm this with manual tests. But in addition to this we could also use
+    -- the CNF converter to test whether our equivalence method produces the
+    -- desired results. From this side we may assume that the CNF converter
+    -- works correctly, thus we can use it to automatically test the
+    -- functionality of the equivalence function. Since both tests would be the
+    -- same, this test can be found in assignment 3 when we test the CNF
+    -- converter output.
 
     -- Manually test contradiction
     testContradictionIO (Cnj [p, (Neg p)]) True
@@ -110,11 +120,27 @@ main = do
 
 
     putStrLn "\n==== ASSIGNMENT 3 ===="
+    -- In order to test our formula to CNF converter, we can use a number of
+    -- methods. The first method we could use is to check if the output of the
+    -- converter is the same as our set expectations. These manual tests will
+    -- show us whether certain statements (sub-formulas) are correctly converted
+    -- into CNF form as we would expect.
+    --
+    -- Secondly, we can test whether the converted formulas give the same output
+    -- as the pre-converter formulas. We can do this using our form generator
+    -- from assignment 4. In order to test this, we have to generate a formula
+    -- and create a duplicate, which is then converted into CNF form. By doing
+    -- so we should have two differently formatted formulas giving the same
+    -- output. We will test this by checking if they are equivalent using the
+    -- equivalent method from assignment 1.
+    --
     -- TODO finish
     -- & manual testing of expectations
 
 
     putStrLn "\n==== ASSIGNMENT 4 ===="
+    -- Testing of the CNF converter: see assignment 3.
+    --
     -- TODO define properties
     -- & automated testing to see if outcome is the same as pre-CNF
 
