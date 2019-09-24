@@ -180,4 +180,7 @@ main = do
 
 
     putStrLn "\n==== ASSIGNMENT 5 ===="
-    -- TODO testing both 1 and 2
+    -- Test whether all elements in created set are also present in original
+    -- form. Using another way to get those elements
+    putStrLn "\nTesting sub property of containing all correct sets: "
+    quickCheckTestSetPropertyTwo
