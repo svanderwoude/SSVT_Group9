@@ -1,6 +1,6 @@
 -- LAB 4
 -- Assignment 2
--- Time: 30 minutes
+-- Time: 45 minutes (so far)
 
 module Ass2 where
 import Data.List
