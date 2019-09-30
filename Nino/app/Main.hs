@@ -4,7 +4,8 @@ module Main where
 --import Propreverse
 import Lab2
 import Lab3
-import SetOrd
+import Lab4
+import SetOrd2
 import Test.QuickCheck
 import Data.Char
 import Data.List
@@ -29,7 +30,7 @@ main :: IO ()
 main = do
     -- Assignment 2
     -- Excercise 1
-    -- putStrLn "\n==Ex 1 ==\n"
+    --putStrLn "\n==Ex 1 ==\n"
     -- x <- fmap (countQ (Qt 0 0 0 0 0)) (probs 10000)
     -- print x
     
@@ -78,24 +79,27 @@ main = do
     -- --ibanCheckerInvalidList
 
 
-    -- Assigment #3
-    putStrLn "\n==Ex 1 ==\n"
-    putStrLn "Contradiction is : "
-    let contradiction = Cnj [p, (Neg p)]
-    print $ testContradiction contradiction
+    -- -- Assigment #3
+    -- putStrLn "\n==Ex 1 ==\n"
+    -- putStrLn "Contradiction is : "
+    -- let contradiction = Cnj [p, (Neg p)]
+    -- print $ testContradiction contradiction
     
-    putStrLn "\nTautology is : "
-    let tauto = Dsj [p, (Neg p)]
-    print $ testTautology tauto
-    putStrLn "\n\n"
+    -- putStrLn "\nTautology is : "
+    -- let tauto = Dsj [p, (Neg p)]
+    -- print $ testTautology tauto
+    -- putStrLn "\n\n"
 
-    putStrLn "\nEntails is : "
-    --let ent = (Dsj [p, Neg q])
-    --putStrLn "\n\n"
+    -- putStrLn "\nEntails is : "
+    -- --let ent = (Dsj [p, Neg q])
+    -- --putStrLn "\n\n"
 
-    putStrLn "\n==Ex 5 ==\n"
-    let formula = Impl (Cnj [Neg (Dsj [Prop 1, Prop 2]), Prop 3]) (Prop 4)
-    printnsub formula
-    printnsub contradiction
-    printnsub tauto
-    print $ sub formula
+    -- putStrLn "\n==Ex 5 ==\n"
+    -- let formula = Impl (Cnj [Neg (Dsj [Prop 1, Prop 2]), Prop 3]) (Prop 4)
+    -- printnsub formula
+    -- printnsub contradiction
+    -- printnsub tauto
+    -- print $ sub formula
+
+    putStrLn "\n==Ex 3 ==\n"
+    print $ symClos [(1,2),(2,3),(3,4)]
