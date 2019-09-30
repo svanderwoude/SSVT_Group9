@@ -178,10 +178,16 @@ symClos r = sort $ r `union` [(x,y) | (y,x) <- r]
 -- ======================================================================================
 
 
--- Excercise 4 -> Time spent: 
+-- Excercise 4 -> Time spent: 50min (so far)
 
+{-
+    A serial relation is one where for every x in the domain, there is a y, for which xRy.
+    To check that we write a function which says that for all elements in the domain, there
+    should be a tuple in the relation, where the element of the domain exists as X, X /= Y
+    and Y is also part of the domain. 
+-}
 isSerial :: Eq a => [a] -> Rel a -> Bool
-isSerial = error "not yet implemented"
+isSerial ds rs = all (\d -> any (\(x,y) -> d == x && d /= y && y `elem` ds) rs) ds 
 
 
 -- ======================================================================================
@@ -209,3 +215,55 @@ trClos r = sort $ fp (\x -> x `union` (x @@ x)) r
 
 
 -- Excercise 6 -> Time spent: 
+{-
+    Generate random relations by taking 2 randomly generated integer lists and zipping
+    them.
+-}
+genRandomRel :: IO (Rel Int)
+genRandomRel = do
+    list1 <- genIntList
+    list2 <- genIntList
+    return (zip list1 list2)
+
+
+{-
+    If an element of the relation is (x,y), then every x in the relation, should exist
+    as a y in the relation too.
+-}
+symClosProp1 :: Ord a => Rel a -> Bool
+symClosProp1 rs = all (\(x,y) -> any (\(x1,y1) -> x == y1) rs) rs
+
+{-
+    If an element of the relation is (x,y), then every y in the relation, should exist
+    as a x in the relation too.
+-}
+symClosProp2 :: Ord a => Rel a -> Bool
+symClosProp2 rs = all (\(x,y) -> any (\(x1,y1) -> y == x1) rs) rs
+
+{-
+    Apply symClos to a given Rel Int and check whether the 2 properties hold for the
+    output.
+-}
+symClosTest :: Rel Int -> Bool
+symClosTest rs = let symClosure = symClos rs
+    in symClosProp1 symClosure && symClosProp2 symClosure
+
+{-
+    Tests a property of a relation.
+-}
+testRelation :: (Rel Int -> Bool) -> Int -> IO ()
+testRelation p 0 = putStrLn "Finished tests!"
+testRelation p n = do
+    rel <- genRandomRel
+    putStrLn ("Test " ++ show n ++ " : " ++ show (p rel)) 
+    testRelation p (n-1)
+
+{-
+    We test the 2 properties for symmetric closure defined above with the custom test
+    function testRelation.
+-}
+testSymClos = testRelation symClosTest 100
+
+quickCheckSymClos = quickCheckResult symClosTest
+
+-- TODO: props for transitive closure??
