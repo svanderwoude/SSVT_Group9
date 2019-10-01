@@ -214,7 +214,7 @@ trClos r = sort $ fp (\x -> x `union` (x @@ x)) r
 -- ======================================================================================
 
 
--- Excercise 6 -> Time spent: 
+-- Excercise 6 -> Time spent: 1h 30min
 {-
     Generate random relations by taking 2 randomly generated integer lists and zipping
     them.
@@ -266,4 +266,49 @@ testSymClos = testRelation symClosTest 100
 
 quickCheckSymClos = quickCheckResult symClosTest
 
--- TODO: props for transitive closure??
+{-
+    Check if for every pair (x,y) in the relation, for which exists another pair (y,z),
+    there is also a pair (x,z).
+-}
+trClosProp1 :: Rel Int -> Bool
+trClosProp1 rs = null [ (x, y1) | (x,y) <- rs, (x1,y1) <- rs, y == x1 && (x,y1) `notElem` rs ]
+
+{-
+    Apply trClos to a relation and check that the trClosProp1 applies to the output.
+-}
+trClosTest :: Rel Int -> Bool
+trClosTest rs = trClosProp1 $ trClos rs
+
+{-
+    Test the property using the custom defined function and using QuickCheck.
+-}
+testTrClos = testRelation trClosTest 100
+
+quickCheckTrClos = quickCheckResult trClosTest
+
+
+-- ======================================================================================
+
+
+-- Excercise 7 -> Time spent: 40min
+
+{-
+    QuickCheck is very good for generating counter-examples, therefore we define a function
+    that tests whether the symmetric closure of a transitive closure of a relation is the
+    same as the transitive closure of the symmetric closure for that relation.
+
+    Then we can use QuickCheck to verify whether that is the case.
+-}
+testTrClosSymClos :: Rel Int -> Bool
+testTrClosSymClos rs = symClos (trClos rs) == trClos (symClos rs)
+
+
+{-
+    QuickCheck fails since our apparently (symClos (trClos rs)) and (trClos (symClos rs))
+    are not equal. An example can be:
+
+    R = [(1,2),(1,3)]
+    symClos (trClos R) = [(1,2),(1,3),(2,1),(3,1)]
+    trClos (symClos R) = [(1,1),(1,2),(1,3),(2,1),(2,2),(2,3),(3,1),(3,2),(3,3)]
+-}
+quickCheckTrClosSymClos = quickCheckResult testTrClosSymClos
