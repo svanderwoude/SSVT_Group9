@@ -13,9 +13,11 @@ import Test.QuickCheck
 type Rel a = [(a,a)]
 
 {-
-    The symmetric closure is equal to the union of R with the transpose of R. This means
-    we have to create a union between the given relation and a second relation where
-    every tuple is reversed.
+     The closure of a relation R with respect to a property P, is the relation obtained 
+    by adding the minimum number of ordered pairs to R to obtain property P. The symmetric
+    closure is equal to the union of R with the transpose of R. In other words, the symmetric 
+    closure must have (b, a) for every (a, b) in R. This means we have to create a union 
+    between the given relation and a second relation where every tuple is reversed.
 -}
 symClos :: Ord a => Rel a -> Rel a
 symClos r = sort $ r `union` [(x,y) | (y,x) <- r]
