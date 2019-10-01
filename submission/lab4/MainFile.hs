@@ -40,7 +40,7 @@ main = do
 
 
     putStrLn "\n==== ASSIGNMENT 4 ===="
-    putStrLn "Copy ass4 test"
+    putStrLn "Look at Ass4.hs for explanation"
 
 
     putStrLn "\n==== ASSIGNMENT 5 ===="
