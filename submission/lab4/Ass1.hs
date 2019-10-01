@@ -1,4 +1,4 @@
-
+module Ass1 where
 import Data.List
 import System.Random
 import Test.QuickCheck
@@ -23,28 +23,28 @@ import SetOrd
 
 genListLength :: IO Int
 genListLength = do
-n <- randomRIO (0,100)
-return n
+    n <- randomRIO (0,100)
+    return n
 
 
 -- https://stackoverflow.com/questions/30740366/list-with-random-numbers-in-haskell
 randomList :: Int -> IO([Int])
 randomList 0 = return []
 randomList n = do
-r  <- randomRIO (1,6)
-rs <- randomList (n-1)
-return (r:rs)
+    r  <- randomRIO (1,6)
+    rs <- randomList (n-1)
+    return (r:rs)
 
 list2setIO :: (Monad m, Ord a) => m [a] -> m (Set a)
 list2setIO list = do
-a <- list
-return $ list2set a
+    a <- list
+    return $ list2set a
 
 genSetsFromScratch :: IO (Set Int)
 genSetsFromScratch  = do
- n <- genListLength
- list <- randomList n
- return $ list2set list
+    n <- genListLength
+    list <- randomList n
+    return $ list2set list
 
 
 -- Next give a version that uses QuickCheck to random test this datatype
@@ -58,4 +58,4 @@ genSetsFromScratch  = do
 -- {-21,-1,30}
 
 instance (Ord a, Arbitrary a) => Arbitrary (Set a) where
-arbitrary = list2set <$> arbitrary
+    arbitrary = list2set <$> arbitrary

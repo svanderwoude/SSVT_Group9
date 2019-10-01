@@ -1,8 +1,8 @@
 module MainFile where
 import Ass1
-import Ass2
+-- import Ass2
 import Ass3
-import Ass4
+-- import Ass4
 import Ass5
 import Ass6
 import Ass7
@@ -32,8 +32,16 @@ main = do
 
 
     putStrLn "\n==== ASSIGNMENT 6 ===="
+    putStrLn "Testing symmetric closure:"
+    quickCheckSymClos
 
+    putStrLn "Testing transitive closure:"
+    quickCheckTrClos
 
 
     putStrLn "\n==== ASSIGNMENT 7 ===="
+    putStrLn "Testing if testTrClosSymClos holds. QuickCheck should generate "
+    putStrLn "a counter example to fail the test, which we use to verify that "
+    putStrLn "there is a difference between the two:\n"
+    quickCheckTrClosSymClos
     

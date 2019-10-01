@@ -1,6 +1,9 @@
 module Ass7 where
+import Ass3
+import Ass5
 import Data.List
 import HelperCodeLab4
+import SetOrd
 import System.Random
 import Test.QuickCheck
 
