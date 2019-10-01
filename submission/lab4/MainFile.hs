@@ -8,11 +8,20 @@ import Ass6
 import Ass7
 import Data.List
 import HelperCodeLab4
+import SetOrd
 import Test.QuickCheck
 
 main = do
     putStrLn "==== ASSIGNMENT 1 ===="
+    putStrLn "Manual random Set Int:"
+    putStrLn "Run in 'ghci Ass1.hs':"
+    putStrLn "genSetsFromScratch"
+    randset <- genSetsFromScratch
+    print randset
 
+    putStrLn "\nQuickCheck random Set Int:"
+    putStrLn "Run in 'ghci Ass1.hs':"
+    putStrLn "generate arbitrary :: IO (Set Int)"
 
 
     putStrLn "\n==== ASSIGNMENT 2 ===="

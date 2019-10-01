@@ -21,7 +21,7 @@ genRandomRel = do
 {-
     SymClos property 1: for every x in a relation R = [(x,y)], the value of x
     should also be present as value of y in another relation. So, for every
-    x in [x,i] there should also be a [j,x].
+    x in (x,i) there should also be a (j,x).
 -}
 symClosProp1 :: Ord a => Rel a -> Bool
 symClosProp1 rs = all (\(x,y) -> any (\(x1,y1) -> x == y1) rs) rs
@@ -29,7 +29,7 @@ symClosProp1 rs = all (\(x,y) -> any (\(x1,y1) -> x == y1) rs) rs
 {-
     SymClos property 2: for every y in a relation R = [(x,y)], the value of y
     should also be present as value of x in another relation. So, for every
-    y in [i,y] there should also be a [y,j].
+    y in (i,y) there should also be a (y,j).
 -}
 symClosProp2 :: Ord a => Rel a -> Bool
 symClosProp2 rs = all (\(x,y) -> any (\(x1,y1) -> y == x1) rs) rs
