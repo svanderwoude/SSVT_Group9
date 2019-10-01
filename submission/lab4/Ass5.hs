@@ -1,4 +1,5 @@
 module Ass5 where
+import Ass3
 import Data.List
 import HelperCodeLab4
 import System.Random
