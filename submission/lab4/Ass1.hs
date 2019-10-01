@@ -14,19 +14,20 @@ import SetOrd
 --
 -- Assignment 1
 --
-
-
 -- Implement a random data generator for the datatype Set Int, where Set is as defined in SetOrd.hs.
 -- Do this from scratch.
 -- The following 4 functions compose the random set generator...
+
 -- ToDO:  Elaborate on edge cases and why you chose ranges
 
+
+-- We decided to generate list up to 100 in length for visual and faster processing. This size could be bigger if wanted/needed.
 genListLength :: IO Int
 genListLength = do
     n <- randomRIO (0,100)
     return n
 
-
+-- randomList takes a list of size n and appends a random number r recursively until the list is empty and returns the new list.
 -- https://stackoverflow.com/questions/30740366/list-with-random-numbers-in-haskell
 randomList :: Int -> IO([Int])
 randomList 0 = return []
@@ -35,11 +36,13 @@ randomList n = do
     rs <- randomList (n-1)
     return (r:rs)
 
+-- 
 list2setIO :: (Monad m, Ord a) => m [a] -> m (Set a)
 list2setIO list = do
     a <- list
     return $ list2set a
 
+-- 
 genSetsFromScratch :: IO (Set Int)
 genSetsFromScratch  = do
     n <- genListLength
