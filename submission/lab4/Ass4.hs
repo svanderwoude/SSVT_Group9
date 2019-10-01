@@ -5,9 +5,7 @@ import System.Random
 import Test.QuickCheck
 
 
-isSerial :: Eq a => [a] -> Rel a -> Bool
-isSerial domain relations = all (\x_first -> any (\(x_second,y) -> x_first == x_second && y `elem` domain && x_second /= y) relations) domain
-
+type Rel a = [(a,a)]
 
 
 infix 1 -->
@@ -16,12 +14,29 @@ infix 1 -->
 p --> q = (not p) || q
 
 
+isSerial :: Eq a => [a] -> Rel a -> Bool
+isSerial domain relations = all (\x_first -> any (\(x_second,y) -> x_first == x_second && y `elem` domain && x_second /= y) relations) domain
+
+
+
+
 -- Property: If the number of relations is smaller then the number of elements in the domain then that means
 -- that not for any x 'elem' A in xRy does not hold ->
 -- ToDo: Elaborate more and use quickcheck
-propertyOne domain relations = length relations < length domain --> not (isSerial ds rs)
+propertyOne :: Eq a => [a] -> Rel a -> Bool
+propertyOne domain relations = length relations < length domain --> not (isSerial domain relations)
 
+isReflexive :: Eq a => [a] -> Rel a -> Bool
+isReflexive domain relations = all (\(x,y) -> x == y && x `elem` domain) relations
 
+propertyTwo :: Eq a => [a] -> Rel a -> Bool
+propertyTwo domain relations = isReflexive domain relations --> isSerial domain relations
+
+-- 
+-- instance (Ord a, Arbitrary a) => Arbitrary (Set a) where
+--   arbitrary = list2set <$> arbitrary
+
+-- quickCheckPropertyOne = quickCheckResult $ forAll genRandomRel propertyOne
 
 -- Consider the relation R = {(x,y) | x = y (mod n)} where (mod n) is the modulo
 -- function in modular arithmetic and n > 0.
