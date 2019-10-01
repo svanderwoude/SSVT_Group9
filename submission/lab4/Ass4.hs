@@ -1,11 +1,16 @@
+{-# LANGUAGE FlexibleInstances #-}
+
+
 module Ass4 where
 import Data.List
 import HelperCodeLab4
 import System.Random
 import Test.QuickCheck
-
+import Ass6
 
 type Rel a = [(a,a)]
+
+
 
 
 infix 1 -->
@@ -21,22 +26,53 @@ isSerial domain relations = all (\x_first -> any (\(x_second,y) -> x_first == x_
 
 
 -- Property: If the number of relations is smaller then the number of elements in the domain then that means
--- that not for any x 'elem' A in xRy does not hold ->
--- ToDo: Elaborate more and use quickcheck
+-- that there is an X in the domain, which is not specified in the relation. Meaning that the domain has
+-- additional values (x), which are not used in the relationship which means that relationship is not serial.
 propertyOne :: Eq a => [a] -> Rel a -> Bool
 propertyOne domain relations = length relations < length domain --> not (isSerial domain relations)
 
+-- Here we wrote a simple function in which we can check if a relationship is reflexive or not.
 isReflexive :: Eq a => [a] -> Rel a -> Bool
 isReflexive domain relations = all (\(x,y) -> x == y && x `elem` domain) relations
 
+-- So, after doing exercise 4.3, we figured that if a relation is reflexive then
+-- it is also serial. Which provides us with the following implication:
 propertyTwo :: Eq a => [a] -> Rel a -> Bool
 propertyTwo domain relations = isReflexive domain relations --> isSerial domain relations
 
--- 
--- instance (Ord a, Arbitrary a) => Arbitrary (Set a) where
---   arbitrary = list2set <$> arbitrary
+-- Here we created a function in which we can generatie arbitrary lists.
+arbitraryList :: Arbitrary a => Gen [a]
+arbitraryList =
+  sized $
+    \n -> do
+      k <- choose (0, n)
+      sequence [arbitrary | _ <- [1..k]]
 
--- quickCheckPropertyOne = quickCheckResult $ forAll genRandomRel propertyOne
+
+-- NOTE∷
+-- Unfinshed relation generator, supposed to generate all the relationships an IT guy would dream off. ;)
+-- instance Arbitrary a => Arbitrary (Rel a) where
+--   arbitrary = do
+--     r <- arbitraryList
+--     s <- arbitraryList
+--     return (Rel (zip r s))
+
+-- NOTE:
+-- Due to a lack of time we were not able to continue the testing of the quickCheck properties
+-- (namely, propertyOne and propertyTwo) above.
+-- We are almost there though, we described the two properties, for one we wrote a isReflexive.
+-- Furthermore we are able to generate list using the arbitraryList function.
+-- Moreover, we are able to use this aribitrarylist function to eventually
+-- generate two different lists and create a relation by zipping these lists.
+-- We currently have the following error∷
+--     Data constructor not in scope: Rel :: [(a0, b0)] -> Rel a
+-- If we would have had more time to eventually solve this error we could use
+-- this arbitrary instance to create a quickCheck test in which we
+-- are able to generate multiple different relations and check the properties.
+
+
+-- Assigment 4.3
+
 
 -- Consider the relation R = {(x,y) | x = y (mod n)} where (mod n) is the modulo
 -- function in modular arithmetic and n > 0.
