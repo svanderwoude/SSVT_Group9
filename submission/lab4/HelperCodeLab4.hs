@@ -211,3 +211,22 @@ randomFlip x = do
 
 getRandomInt :: Int -> IO Int
 getRandomInt n = getStdRandom (randomR (0,n))
+
+{-
+    QuickCheck generator uses the arbitrary function for generating a list of Int and then
+    we pass it as a parameter to list2set.
+-}
+setGenerator :: Gen (Set Int)
+setGenerator = list2set <$> (arbitrary :: Gen [Int]) 
+
+instance (Arbitrary a, Ord a) => Arbitrary (Set a) where
+    arbitrary = list2set <$> arbitrary
+
+
+(.&&.) :: (a -> Bool) -> (a -> Bool) -> a -> Bool
+p .&&. q = \ x -> p x && q x
+
+xor :: Bool -> Bool -> Bool
+xor True False = True
+xor False True = True
+xor _ _ = False

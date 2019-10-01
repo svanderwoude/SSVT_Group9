@@ -1,6 +1,6 @@
 module MainFile where
 import Ass1
--- import Ass2
+import Ass2
 import Ass3
 -- import Ass4
 import Ass5
@@ -16,11 +16,18 @@ main = do
 
 
     putStrLn "\n==== ASSIGNMENT 2 ===="
-    
+    putStrLn "Testing intersection tests:"
+    intersectionSetsTest
+
+    putStrLn "\nTesting union tests:"
+    unionSetsTest
+
+    putStrLn "\n Testing difference tests:"
+    differenceSetsTest
 
 
     putStrLn "\n==== ASSIGNMENT 3 ===="
-    
+    putStrLn "See assignment 6"
 
 
     putStrLn "\n==== ASSIGNMENT 4 ===="
@@ -28,14 +35,16 @@ main = do
 
 
     putStrLn "\n==== ASSIGNMENT 5 ===="
-
+    putStrLn "See assignment 6"
 
 
     putStrLn "\n==== ASSIGNMENT 6 ===="
     putStrLn "Testing symmetric closure:"
+    testSymClos
     quickCheckSymClos
 
-    putStrLn "Testing transitive closure:"
+    putStrLn "\nTesting transitive closure:"
+    testTrClos
     quickCheckTrClos
 
 

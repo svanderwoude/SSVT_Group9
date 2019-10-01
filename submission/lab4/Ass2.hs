@@ -1,13 +1,36 @@
-
 module Ass2 where
 import Data.List
 import HelperCodeLab4
+import SetOrd
 import System.Random
 import Test.QuickCheck
 
 
+-- Set properties true for every ordered set
+{- 
+    Check whether the list's length is equal to the list's length after all duplicates
+    are removed. If that is the case, then no duplicates were present in the original
+    list.
+-}
+hasNoDuplicates :: Ord a => Set a -> Bool 
+hasNoDuplicates (Set xs) = length xs == length (nub xs)
 
--- Excercise 2 -> Time spent: 2h
+-- The list must be ordered as Set maintains ordering of the elements
+isOrderedSet :: Ord a => Set a -> Bool
+isOrderedSet (Set xs) = isOrdered xs
+
+{-
+    Note that we do not check >= but strictly > since the Set cannot contain duplicates,
+    so it is never possible to have a case where 1 element is equal to another.
+-}
+isOrdered :: Ord a => [a] -> Bool
+isOrdered [] = True
+isOrdered (x:xs) = all (> x) xs && isOrdered xs
+
+baseSetOrdProps :: Ord a => Set a -> Bool
+baseSetOrdProps = isOrderedSet HelperCodeLab4..&&. hasNoDuplicates
+
+
 {-
     An intersection of 2 sets is the set that contains all elements that exist in both
     lists.
@@ -27,7 +50,6 @@ intersectionSetsProps (Set ls1) (Set ls2) s3@(Set ls3) =
 
 -- test with the custom generator
 intersectionSetsTest = quickCheckResult $ forAll setGenerator (\s1 s2 -> intersectionSetsProps s1 s2 (intersectionSets s1 s2))
-
 
 
 {-
