@@ -2,7 +2,7 @@ module MainFile where
 import Ass1
 import Ass2
 import Ass3
--- import Ass4
+import Ass4
 import Ass5
 import Ass6
 import Ass7
@@ -31,7 +31,7 @@ main = do
 
 
     putStrLn "\n==== ASSIGNMENT 4 ===="
-
+    putStrLn "Copy ass4 test"
 
 
     putStrLn "\n==== ASSIGNMENT 5 ===="
