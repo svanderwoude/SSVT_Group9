@@ -25,3 +25,5 @@ main = do
 
 
     putStrLn "\n==== ASSIGNMENT 6 ===="
+    quickCheckTree1
+    quickCheckTree2
