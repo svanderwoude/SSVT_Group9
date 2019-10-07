@@ -108,4 +108,4 @@ quickCheckPrimeTestsF1 = quickCheckResult $ forAll genPositiveIntegers (\x -> io
 
 quickCheckPrimeTestsF2 = quickCheckResult $ forAll genPositiveIntegers (\x -> ioProperty (primeTestsF 2 (composite!!x)))
 
-quickCheckPrimeTestsF2 = quickCheckResult $ forAll genPositiveIntegers (\x -> ioProperty (primeTestsF 2 (composite!!x)))
+quickCheckPrimeTestsF3 = quickCheckResult $ forAll genPositiveIntegers (\x -> ioProperty (primeTestsF 3 (composite!!x)))
