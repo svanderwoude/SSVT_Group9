@@ -1,9 +1,33 @@
-module Ass5 where
+module Lab5 where
 
 import Data.List
 import System.Random
 import Test.QuickCheck
 import Lecture5
+
+
+
+-- Exercise 2
+-- Write a function composites :: [Integer] that generates the infinite list of composite natural numbers. 
+composites :: [Integer]
+composites = [x | x <- [2..30], not $ prime x]
+
+-- How would you test this?
+
+-- Exercise 3
+-- Use the list of composite numbers to test Fermat's primality check. What is the least composite number 
+-- that you can find that fools the check, for prime_tests_F k with k=1,2,3 ? What happens if you increase k?
+
+
+
+-- Exercise 4
+carmichael :: [Integer]
+carmichael = [ (6*k+1)*(12*k+1)*(18*k+1) | 
+       k <- [2..], 
+       prime (6*k+1), 
+       prime (12*k+1), 
+       prime (18*k+1) ]
+
 
 
 -- Exercise 5
@@ -34,7 +58,7 @@ lucasLehmer p = s (2^p-1) (p-1) == 0
 
 -- The Sieve of Eratosthenes is a simple algorithm that finds the prime numbers up to a given integer.
 -- Using this function, together with the Lucas-Lehmer test the numbers could hold more or less until 20, but depending on the laptop
--- this number could increase.
+-- this number could increase
 sieve (p:xs) = p : sieve [x | x <- xs, x `mod` p > 0]
 
 -- Method to print Miller-Rabin primeMR function result
@@ -55,3 +79,14 @@ useAllBools (x:xs) = do
 millerR :: Int -> [Integer] -> [IO Bool]
 millerR _ [] = []
 millerR i (x:xs) = primeMR i x : millerR (i+1) xs
+
+
+
+
+
+
+
+
+
+
+
