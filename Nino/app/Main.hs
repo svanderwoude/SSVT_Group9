@@ -1,11 +1,8 @@
 module Main where
 -- Antonino Sauleo
---import Lib
---import Propreverse
-import Lab2
-import Lab3
-import Lab4
-import SetOrd2
+
+import Lab5
+import Lecture5
 import Test.QuickCheck
 import Data.Char
 import Data.List
@@ -101,5 +98,41 @@ main = do
     -- printnsub tauto
     -- print $ sub formula
 
-    putStrLn "\n==Ex 3 ==\n"
-    print $ symClos [(1,2),(2,3),(3,4)]
+    --putStrLn "\n==Ex 2 ==\n"
+    --print $ composites
+
+
+    putStrLn "\n==Ex 5 ==\n"
+
+    putStrLn "List of Mersenne Primes (exponents): "
+    print $ realPrimes
+
+    putStrLn "\nList of Mersenne Primes: "
+    print $ mersenneP
+
+    -- Verify list of mersenne primes using Lucas-Lehmer test and checkMersennePrime
+    let printMersennes = (\x -> putStrLn $ "\nAfter Lucas-Lehmer test + checkMersennePrime: " ++ show x)
+    printMersennes $ filter lucasLehmer $ realPrimes
+
+    -- Verify whether the numbers that realPrimes found are genuine Mersenne primes using Miller-Rabin test.
+    let testMersennes = millerR 1 realPrimes
+    useAllBools (testMersennes)
+
+    -- From the results we can say realPrimes (using checkMersennePrime and prime) returns mersenne primes.
+    -- however it can take a lot of processing power due to its exponential complexity.
+
+    putStrLn "\n====\n"
+
+    -- Prints list of mersenne primes using Sieve of Eratosthenes and Lucas-Lehmer test
+    -- This function
+    let printMersennes = \x -> putStrLn $ "After Lucas-Lehmer + Sieve of Eratosthenes: " ++ show x
+    printMersennes $ take 20 $ filter lucasLehmer $ sieve [2..]
+
+    -- Verify whether the numbers that Sieve of Eratosthenes and Lucas-Lehmer test found are genuine Mersenne primes.
+    let testMersennesVersion2 = millerR 1 $ take 20 $ filter lucasLehmer $ sieve [2..]
+    useAllBools (testMersennesVersion2)
+
+    -- From the results we can say Sieve of Eratosthenes and Lucas-Lehmer test returns genuine mersenne primes.
+    -- and it showed a better performance overall.
+    
+    -- We found that a prime number in order to be a Mersenne prime it requires both ((2^p) - 1) to be a prime and p to be a prime.
