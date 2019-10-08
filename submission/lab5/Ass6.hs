@@ -95,13 +95,31 @@ step2 n = \ (x,y) -> if x+y <= n then [(x+y,y),(x,x+y)] else [] -- step function
 treeToList :: Tree a -> [a]
 treeToList (T x xs) = x : concatMap treeToList xs
 
+-- We expect the list to contain all of these pairs
+expectedPairs :: Integer -> [(Integer, Integer)]
+expectedPairs n = [(x,y) | x <- [1..n], y <- [1..n], coprime x y]
+
 -- Generate a tree using tree1 n, convert all values (nodes) to a list, and then
 -- use this list to check if all pairs of x and y are coprimes.
 testTree1Coprime :: Integer -> Bool
 testTree1Coprime n = all (\(x,y) -> coprime x y) (treeToList (tree1 n))
 
--- QuickCheck test
+-- Generate a tree using tree1 n, convert all values (nodes) to a list, and then
+-- see if the list contains the same pairs as expected from expectedPairs
+testTree1List :: Integer -> Bool
+testTree1List n = do
+    let expected = expectedPairs n
+    let actual = treeToList (tree1 n)
+    let result1 = all (\x -> elem x actual) expected
+    let result2 = all (\x -> elem x expected) actual
+    result1 && result2
+
+-- QuickCheck tests
+-- Test for all coprimes
 quickCheckTree1 = quickCheck $ forAll genPositiveIntegers $ testTree1Coprime
+
+-- Test for correct items as expected
+quickCheckTree1List = quickCheck $ forAll genPositiveIntegers $ testTree1List
 
 
 -- Tree2 n works almost the same as tree1 n, however instead of using the value
@@ -142,10 +160,29 @@ quickCheckTree1 = quickCheck $ forAll genPositiveIntegers $ testTree1Coprime
 testTree2Coprime :: Integer -> Bool
 testTree2Coprime n = all (\(x,y) -> coprime x y) (treeToList (tree2 n))
 
--- QuickCheck test
+-- Generate a tree using tree2 n, convert all values (nodes) to a list, and then
+-- see if the list contains the same pairs as expected from expectedPairs
+testTree2List :: Integer -> Bool
+testTree2List n = do
+    let expected = expectedPairs n
+    let actual = treeToList (tree2 n)
+    let result1 = all (\x -> elem x actual) expected
+    let result2 = all (\x -> elem x expected) actual
+    result1 && result2
+
+-- QuickCheck tests
+-- Test for all coprimes
 quickCheckTree2 = quickCheck $ forAll genPositiveIntegers $ testTree2Coprime
+
+-- Test for correct items as expected
+quickCheckTree2List = quickCheck $ forAll genPositiveIntegers $ testTree2List
 
 
 -- Positive Integer generator for tests (from assignment 1)
 genPositiveIntegers :: Gen Integer
 genPositiveIntegers = abs <$> suchThat (arbitrary :: Gen Integer) (> 0)
+
+
+-- As we can see from all tests of both tree1 and tree2, all pairs generated
+-- are coprimes. But most importantly, the generated pairs are exactly the pairs
+-- in the set {(x,y)|1<=x<=n,1<=y<=n with x,y co-prime}, as expected.

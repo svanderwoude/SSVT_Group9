@@ -29,7 +29,11 @@ main = do
     
 
     putStrLn "\n==== ASSIGNMENT 6 ===="
-    putStrLn "Testing tree1:"
+    putStrLn "Testing tree1 for all coprimes:"
     quickCheckTree1
-    putStrLn "\nTesting tree2:"
+    putStrLn "\nTesting tree1 for expected list of pairs:"
+    quickCheckTree1List
+    putStrLn "\nTesting tree2 for all coprimes:"
     quickCheckTree2
+    putStrLn "\nTesting tree2 for expected list of pairs:"
+    quickCheckTree2List
