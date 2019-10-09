@@ -122,9 +122,8 @@ main = do
     -- however it can take a lot of processing power due to its exponential complexity.
 
     putStrLn "\n====\n"
-
+    
     -- Prints list of mersenne primes using Sieve of Eratosthenes and Lucas-Lehmer test
-    -- This function
     let printMersennes = \x -> putStrLn $ "After Lucas-Lehmer + Sieve of Eratosthenes: " ++ show x
     printMersennes $ take 20 $ filter lucasLehmer $ sieve [2..]
 

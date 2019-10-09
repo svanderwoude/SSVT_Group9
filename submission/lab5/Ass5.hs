@@ -41,7 +41,7 @@ sieve (p:xs) = p : sieve [x | x <- xs, x `mod` p > 0]
 useBool :: IO Bool -> IO ()
 useBool a = do
     b <- a
-    putStrLn (show b)
+    putStr (show b ++ " | ")
 
 useAllBools :: [IO Bool] -> IO()
 useAllBools [] = putStrLn "end"
@@ -49,9 +49,7 @@ useAllBools (x:xs) = do
     useBool x
     useAllBools xs
 
--- The Miller-Rabin test is an efficient probabilistic primality test based on strong pseudoprimes. This
--- implementation uses the first seven prime numbers (if necessary) as test cases. It is thus exact for
--- all numbers n < 341550071728321.
+-- The Miller-Rabin test is an efficient probabilistic primality test based on strong pseudoprimes.
 millerR :: Int -> [Integer] -> [IO Bool]
 millerR _ [] = []
 millerR i (x:xs) = primeMR i x : millerR (i+1) xs

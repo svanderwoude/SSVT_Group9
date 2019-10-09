@@ -65,7 +65,7 @@ sieve (p:xs) = p : sieve [x | x <- xs, x `mod` p > 0]
 useBool :: IO Bool -> IO ()
 useBool a = do
     b <- a
-    putStrLn (show b)
+    putStr (show b ++ " | ")
 
 useAllBools :: [IO Bool] -> IO()
 useAllBools [] = putStrLn "end"

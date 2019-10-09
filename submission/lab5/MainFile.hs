@@ -68,7 +68,6 @@ main = do
     putStrLn "\n====\n"
 
     -- Prints list of mersenne primes using Sieve of Eratosthenes and Lucas-Lehmer test
-    -- This function
     let printMersennes = \x -> putStrLn $ "After Lucas-Lehmer + Sieve of Eratosthenes: " ++ show x
     printMersennes $ take 20 $ filter lucasLehmer $ sieve [2..]
 
